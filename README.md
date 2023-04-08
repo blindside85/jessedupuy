@@ -1,3 +1,3 @@
-# Duveloper's Git Home
+# My site
 
 Repo for me to track my site...
