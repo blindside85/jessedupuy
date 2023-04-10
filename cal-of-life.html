@@ -152,6 +152,9 @@
             }
 
             function renderCal() {
+                // ensure the canvas is cleared before rendering
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
                 ctx.fillStyle = 'white';
                 ctx.font = '2em Arial';
 
