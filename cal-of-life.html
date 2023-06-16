@@ -53,6 +53,7 @@
 
     <script>
         ((win, doc) => {
+            const url = new URL(win.location.href);
             const canvas = doc.querySelector('canvas');
             const ctx = canvas.getContext('2d');
             const bdayInput = document.querySelector('input');
@@ -97,6 +98,13 @@
                 }
             ];
 
+
+            let params = new URLSearchParams(url.search);
+
+            if (params.has('bday')) {
+                bdayInput.value = params.get('bday');
+            }
+
             let bday = bdayInput.valueAsDate;
             let currAge = Math.floor((today - bday) / yearMillis);
             let bdayWeekNum = getWeekNum(bday);
@@ -106,15 +114,22 @@
                 currAge = Math.floor((today - bday) / yearMillis);
                 bdayWeekNum = getWeekNum(bday);
                 setDataText();
+                updateParams();
                 renderCal();
             });
 
             function getWeekNum(day) {
-                const firstDayOfYear = new Date(day.getFullYear(), 0, 4);
+                const firstDayOfYear = new Date(day.getFullYear(), 0, 1);
                 const daysSinceFirstDayOfYear = (day - firstDayOfYear) / dayMillis;
                 const daysSinceFirstDayOfWeek = daysSinceFirstDayOfYear + firstDayOfYear.getDay() + 1;
                 return Math.ceil(daysSinceFirstDayOfWeek / 7);
             };
+
+            function updateParams() {
+                params.set('bday', bdayInput.value);
+                url.search = params.toString();
+                history.replaceState({}, 'durr', url);
+            }
 
             function setDataText() {
                 const lifeWeeks = weeksPerYear * currAge - bdayWeekNum;
