@@ -2,19 +2,15 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import '../styles/cal.css';
 ---
-<style>
-
-</style>
 
 <script src="../scripts/cal.js"></script>
 
 <BaseLayout title="calendar of life">
-    <a href="/" title="go home">back to homepage</a>
-    <div class="bday">
-        <label for="bday">Enter your birthday:</label>
-        <input type="date" value="2000-01-01" min="1924-01-01" max="2020-01-01">
-    </div>
-    <p class="life-math">eyo world</p>
+  <div class="bday">
+    <label for="bday">Enter your birthday:</label>
+    <input type="date" value="2000-01-01" min="1924-01-01" max="2020-01-01">
+  </div>
+  <p class="life-math">eyo world</p>
 
-    <canvas width="1000"></canvas>
+  <canvas width="1000"></canvas>
 </BaseLayout>
