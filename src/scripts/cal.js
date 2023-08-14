@@ -106,7 +106,7 @@
     }
 
     function printYearLabels(rowY, year) {
-        ctx.fillStyle = 'black';
+        ctx.fillStyle = 'currentcolor';
         ctx.font = '0.8em Arial';
         ctx.textAlign = 'right';
         ctx.fillText(year, bubbleStartX, rowY + bubbleSpacing * 2);
@@ -116,7 +116,7 @@
         // ensure the canvas is cleared before rendering
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        ctx.fillStyle = 'black';
+        ctx.fillStyle = 'currentcolor';
         ctx.font = '2em Arial';
 
         for (const [idx, stage] of stages.entries()) {

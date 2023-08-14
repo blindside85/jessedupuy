@@ -5,6 +5,7 @@ input {
 input {
     background-color: transparent;
     border: none;
+    color: inherit;
 }
 canvas {
     display: block;
