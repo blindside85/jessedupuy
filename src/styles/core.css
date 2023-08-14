@@ -17,11 +17,11 @@ body {
 }
 
 a {
-  color: inherit;
+  color: darkgslategray;
   text-decoration: none;
 }
-nav a:hover {
-  color: #f0f0f0;
+nav a:hover,
+main a:hover {
   text-decoration: underline;
 }
 
@@ -45,6 +45,8 @@ nav a:hover {
 }
 .wrapper footer {
   grid-area: footer;
+
+  font-size: 0.8em;
 }
 
 /* dark mode media query */
@@ -56,5 +58,9 @@ nav a:hover {
     background-position: 0px 0px;
     background-repeat: no-repeat;
     background-image: radial-gradient(75% 75% at 50% 0%, rgb(55, 55, 55) 0%, rgba(255, 255, 255, 0) 80%);
+  }
+
+  a {
+    color: pink;
   }
 }
