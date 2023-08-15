@@ -6,15 +6,18 @@ body {
   margin: 0;
 }
 
-body {
-  display: flex;
-  justify-content: center;
-  font: 1.1em/1.3em Helvetica, Arial, sans-serif;
+html {
   background: #f0f0f0;
   background-size: 100% 100%;
   background-position: 0px 0px;
   background-repeat: no-repeat;
   background-image: radial-gradient(75% 75% at 0% 0%, rgb(200, 200, 200) 0%, rgba(255, 255, 255, 0) 80%);
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  font: 1.1em/1.3em Helvetica, Arial, sans-serif;
 }
 
 a {
@@ -50,18 +53,15 @@ main a:hover {
   font-size: 0.8em;
 }
 
-/* dark mode media query */
-@media (prefers-color-scheme: dark) {
-  body {
-    color: #f0f0f0;
-    background: #474747;
-    background-size: 100% 100%;
-    background-position: 0px 0px;
-    background-repeat: no-repeat;
-    background-image: radial-gradient(75% 75% at 00% 0%, rgb(55, 55, 55) 0%, rgba(255, 255, 255, 0) 80%);
-  }
+html.dark {
+  color: #f0f0f0;
+  background: #474747;
+  background-size: 100% 100%;
+  background-position: 0px 0px;
+  background-repeat: no-repeat;
+  background-image: radial-gradient(75% 75% at 00% 0%, rgb(55, 55, 55) 0%, rgba(255, 255, 255, 0) 80%);
+}
 
-  a {
-    color: pink;
-  }
+.dark a {
+  color: pink;
 }
