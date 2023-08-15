@@ -1,6 +1,7 @@
 ---
+layout: '../../layouts/MarkdownPostLayout.astro'
 title: 'Lorem ipsum'
-pubDate: 2023-08-13
+pubDate: 2023-08-14
 description: 'This is the second post of my new Astro blog.'
 author: 'Jesse'
 image:
@@ -8,9 +9,6 @@ image:
     alt: 'The full Astro logo.'
 tags: ["astro", "blogging", "learning in public"]
 ---
-# Lorem ipsum
-
-Published on: 2022-07-01
 
 Welcome to my _new blog_ about learning Astro! Here, I will share my learning journey as I build a new website.
 

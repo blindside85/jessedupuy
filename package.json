@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@astrojs/rss": "^2.4.4",
     "astro": "^2.10.7"
   },
   "scripts": {
