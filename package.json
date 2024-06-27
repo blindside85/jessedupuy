@@ -1,13 +1,13 @@
 {
-  "dependencies": {
-    "@astrojs/rss": "^2.4.4",
-    "astro": "^2.10.7"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview"
-  }
+    "dependencies": {
+        "@astrojs/rss": "^4.0.7",
+        "astro": "^4.11.3"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "dev": "astro dev",
+        "start": "astro dev",
+        "build": "astro build",
+        "preview": "astro preview"
+    }
 }

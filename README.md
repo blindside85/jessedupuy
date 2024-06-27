@@ -1,3 +1,3 @@
-# My site
+# jessedupuy.me
 
-Repo for me to track my site...
+Source code containing all the files for my site / blog / etc.

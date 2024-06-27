@@ -1,6 +1,8 @@
 ((win, doc) => {
     const url = new URL(win.location.href);
     const canvas = doc.querySelector('canvas');
+    const originalHeight = canvas.height;
+    const originalWidth = canvas.width;
     const ctx = canvas.getContext('2d');
     const bdayInput = document.querySelector('input');
     const dataText = document.querySelector('.life-math');
@@ -16,6 +18,8 @@
     const bubbleStartX = bubbleRadius * 3;
     const bubbleStartY = bubbleRadius * 2;
     const labelX = bubbleStartX + (weeksPerYear + 1) * (bubbleRadius * 2);
+
+    const px = 20 - (((1366 - canvas.width) / 1366) * 20);
 
     const stages = [
         {
@@ -80,7 +84,7 @@
     function setDataText() {
         const lifeWeeks = weeksPerYear * currAge - bdayWeekNum;
         const totalWeeks = weeksPerYear * yearsPerLife;
-        const lifePercentage = (lifeWeeks/totalWeeks*100).toPrecision(3);
+        const lifePercentage = (lifeWeeks / totalWeeks * 100).toPrecision(3);
         dataText.innerHTML = `You've lived ${lifeWeeks.toLocaleString()} weeks (${lifePercentage}%) of the ${totalWeeks.toLocaleString()} possible weeks of an average ${yearsPerLife}-year human life.`;
     }
 
@@ -96,7 +100,7 @@
 
     function printStageLabels(labelY, stageColor, stageName) {
         ctx.fillStyle = stageColor;
-        ctx.font = '0.8em Arial';
+        ctx.font = `${px}px Arial`;
         ctx.textAlign = 'left';
         ctx.save();
         ctx.translate(labelX, labelY - bubbleRadius);
@@ -105,14 +109,31 @@
         ctx.restore();
     }
 
-    function printYearLabels(rowY, year) {
-        ctx.fillStyle = 'currentcolor';
-        ctx.font = '0.8em Arial';
+    function printYearLabels(rowY, year, stageColor) {
+        ctx.fillStyle = stageColor;
+        ctx.font = `${px}px Arial`;
         ctx.textAlign = 'right';
         ctx.fillText(year, bubbleStartX, rowY + bubbleSpacing * 2);
     }
 
     function renderCal() {
+        let dimensions = getObjectFitSize(
+            true,
+            canvas.clientWidth,
+            canvas.clientHeight,
+            canvas.width,
+            canvas.height
+        );
+        const dpr = window.devicePixelRatio || 1;
+        canvas.width = dimensions.width * dpr;
+        canvas.height = dimensions.height * dpr;
+
+        let ratio = Math.min(
+            canvas.clientWidth / originalWidth,
+            canvas.clientHeight / originalHeight
+        );
+        ctx.scale(ratio * dpr, ratio * dpr);
+
         // ensure the canvas is cleared before rendering
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -144,9 +165,39 @@
                     }
                 }
 
-                printYearLabels(rowY, year);
+                printYearLabels(rowY, year, stageColor);
             }
         }
+    }
+
+    // adapted from: https://www.npmjs.com/package/intrinsic-scale
+    function getObjectFitSize(
+        contains /* true = contain, false = cover */,
+        containerWidth,
+        containerHeight,
+        width,
+        height
+    ) {
+        var doRatio = width / height;
+        var cRatio = containerWidth / containerHeight;
+        var targetWidth = 0;
+        var targetHeight = 0;
+        var test = contains ? doRatio > cRatio : doRatio < cRatio;
+
+        if (test) {
+            targetWidth = containerWidth;
+            targetHeight = targetWidth / doRatio;
+        } else {
+            targetHeight = containerHeight;
+            targetWidth = targetHeight * doRatio;
+        }
+
+        return {
+            width: targetWidth,
+            height: targetHeight,
+            x: (containerWidth - targetWidth) / 2,
+            y: (containerHeight - targetHeight) / 2
+        };
     }
 
     canvas.height = (bubbleRadius * 2 + bubbleSpacing * 3) * yearsPerLife;

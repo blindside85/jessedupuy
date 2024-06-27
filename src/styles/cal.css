@@ -1,14 +1,23 @@
-.life-math,
-input {
+.bday,
+.life-math {
     margin-bottom: 1rem;
 }
+
+.bday {
+    padding: 1rem;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+.dark .bday {
+    background-color: rgba(0,0,0,0.5);
+}
+
 input {
     background-color: transparent;
     border: none;
     color: inherit;
 }
+
 canvas {
-    display: block;
-    margin: auto;
-    padding: 1rem;
+    width: 100%;
+    object-fit: contain;
 }

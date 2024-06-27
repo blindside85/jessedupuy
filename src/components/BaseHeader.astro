@@ -1,6 +1,7 @@
 ---
-import ThemeIcon from './ThemeIcon.astro';
+import ThemeIcon from "./ThemeIcon.astro";
 ---
+
 <style>
     .logo {
         display: inline-block;
@@ -18,19 +19,21 @@ import ThemeIcon from './ThemeIcon.astro';
 </style>
 
 <header>
+    <a href="/" title="go home I guess" class="logo">
+        ¯\_(ツ)_/¯ jessedupuy.me
+    </a>
 
-  <a href="/" title="go home I guess" class="logo">
-    ¯\_(ツ)_/¯ jessedupuy.me
-  </a>
+    <ThemeIcon />
 
-  <ThemeIcon />
-
-  <nav class="navigation">
-    <ol>
-      <li><a title="about" href="/about">about</a></li>
-      <li><a title="blog" href="/blog">blog</a></li>
-      <li><a title="tags" href="/tags">tags</a></li>
-      <li><a title="calendar of life" href="/cal-of-life">calendar of life</a></li>
-    </ol>
-  </nav>
+    <nav class="navigation">
+        <ol>
+            <li><a title="about" href="/about">about</a></li>
+            <li><a title="blog" href="/blog">blog</a></li>
+            <li><a title="tags" href="/tags">tags</a></li>
+            <li>
+                <a title="calendar of life" href="/cal-of-life"
+                    >calendar of life</a>
+            </li>
+        </ol>
+    </nav>
 </header>

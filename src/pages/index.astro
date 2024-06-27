@@ -1,7 +1,17 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import BaseLayout from "../layouts/BaseLayout.astro";
+const title = "home";
 ---
-<BaseLayout title="home">
-    <p>My name is Jesse. And this is all I can bring myself to put on this page for now :\</p>
-    <a href="cal-of-life" title="calendar of life">check out my calendar of life if you want. I think it's pretty neat.</a>
+
+<BaseLayout title={title}>
+    <p>
+        Hey. I'm Jesse- nice to meet you! You're probably wondering where all
+        the content is. Let me assure you: eventually there'll be a bunch. But
+        for now, please enjoy this Spartan, minimalist offering.
+    </p>
+    <p>
+        For starters, you could <a href="cal-of-life" title="calendar of life"
+            >check out my calendar of life</a
+        > (if you want a free existential crisis, that is).
+    </p>
 </BaseLayout>
