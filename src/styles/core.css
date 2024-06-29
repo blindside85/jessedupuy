@@ -8,7 +8,7 @@ body {
 
 html {
     font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "DejaVu Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif;
-    background-image: url(/natural-white.webp);
+    background-image: url(../images/natural-white.webp);
     background-color: #ebe8e7;
     background-position: 0px 0px;
 }
@@ -36,11 +36,9 @@ p {
 }
 
 a {
-    color: currentColor;
     text-decoration: none;
 }
 
-nav a:hover,
 main a:hover {
     text-decoration: underline;
 }
@@ -75,12 +73,12 @@ main a:hover {
 
 html.dark {
     color: #f0f0f0;
-    background-image: url(/natural-black.webp);
+    background-image: url(../images/natural-black.webp);
     background-color: #091015;
 }
 
 .dark a {
-    color: rgb(255, 79, 152);
+    /* color: rgb(255, 79, 152); */
 }
 
 @media (width >=50em) {

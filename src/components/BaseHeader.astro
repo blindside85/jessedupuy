@@ -12,27 +12,47 @@ import ThemeIcon from "./ThemeIcon.astro";
         color: inherit;
     }
 
-    .navigation ol {
+    header {
+        margin-bottom: 4rem;
+    }
+    nav {
         margin-top: 1rem;
-        padding-left: 1.5rem;
+    }
+    nav ol {
+        margin: 0;
+        padding: 0;
+    }
+    nav li {
+        display: inline-block;
+        margin: 0;
+    }
+    nav a {
+        padding: 0.5rem 1rem;
+        border-radius: 0.2rem;
+        background-color: white;
+        transition: background-color 0.2s ease;
+    }
+    nav a:hover {
+        background-color: #eee;
     }
 </style>
 
 <header>
-    <a href="/" title="go home I guess" class="logo">
-        ¯\_(ツ)_/¯ jessedupuy.me
+    <a href="/" title="return to the homepage" class="logo">
+        jessedupuy.me ¯\_(ツ)_/¯
     </a>
 
     <ThemeIcon />
 
     <nav class="navigation">
         <ol>
-            <li><a title="about" href="/about">about</a></li>
-            <li><a title="blog" href="/blog">blog</a></li>
-            <li><a title="tags" href="/tags">tags</a></li>
+            <li><a title="learn about me" href="/about">about</a></li>
+            <li><a title="read my blog" href="/blog">blog</a></li>
+            <li><a title="view the post tags list" href="/tags">tags</a></li>
             <li>
-                <a title="calendar of life" href="/cal-of-life"
-                    >calendar of life</a>
+                <a title="play with the calendar of life" href="/cal-of-life"
+                    >calendar of life</a
+                >
             </li>
         </ol>
     </nav>

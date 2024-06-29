@@ -21,6 +21,15 @@
         padding: 1rem;
         border: 0;
         background: none;
+        cursor: pointer;
+    }
+
+    #themeToggle path {
+        transition: fill 0.2s ease;
+    }
+
+    #themeToggle:hover .sun {
+        fill: goldenrod;
     }
     #themeToggle svg {
         max-width: 1.5rem;
@@ -32,11 +41,15 @@
         fill: transparent;
     }
 
-    :global(.dark) .sun {
+    :global(.dark) .sun,
+    :global(.dark) #themeToggle .sun {
         fill: transparent;
     }
     :global(.dark) .moon {
         fill: white;
+    }
+    :global(.dark) #themeToggle:hover .moon {
+        fill: silver;
     }
 </style>
 

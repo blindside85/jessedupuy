@@ -1,7 +1,8 @@
 {
     "dependencies": {
         "@astrojs/rss": "^4.0.7",
-        "astro": "^4.11.3"
+        "astro": "^4.11.3",
+        "sharp-ico": "^0.1.5"
     },
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,5 +10,8 @@
         "start": "astro dev",
         "build": "astro build",
         "preview": "astro preview"
+    },
+    "devDependencies": {
+        "@types/node": "^20.14.9"
     }
 }

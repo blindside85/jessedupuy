@@ -1,16 +1,16 @@
-# Build stage
-FROM node:lts AS build
+FROM node:lts AS base
 WORKDIR /app
+
 COPY . .
-RUN npm i
+RUN npm install
+
+FROM base AS builder
+WORKDIR /app
+
 RUN npm run build
 
-# Runtime stage
-FROM node:lts-slim AS runtime
-WORKDIR /app
-RUN npm install -g http-server
-COPY --from=build /app/dist /app/dist
+FROM nginx:1.26-alpine-slim as website
 
-# Expose port 8080 and serve the static files
-EXPOSE 8080
-CMD ["http-server", "dist", "-p", "8080"]
+COPY --from=builder /app/dist /usr/share/nginx/html
+
+CMD ["nginx", "-g", "daemon off;"]
