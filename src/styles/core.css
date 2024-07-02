@@ -31,6 +31,10 @@ h6 {
     margin: 0 0 1rem;
 }
 
+h1 {
+    font-size: 1.7em;
+}
+
 p {
     font: 1.1em/1.3em Times, serif;
 }
