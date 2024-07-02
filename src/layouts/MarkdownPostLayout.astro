@@ -4,14 +4,22 @@ import BaseHeader from "@components/BaseHeader.astro";
 import Footer from "@components/Footer.astro";
 import "@styles/core.css";
 
+
 const { frontmatter } = Astro.props;
+let title;
+if (Astro.url.host.includes('localhost')) {
+    title = `LOCAL: blog: ${Astro.props.title}`
+} else {
+    title = `blog: ${frontmatter.title}`;
+}
+
 ---
 
 <!doctype html>
 <html lang="en">
     <head>
         <HtmlHead
-            title={"blog: " + frontmatter.title}
+            {title}
             desc={frontmatter.description}
         />
     </head>
