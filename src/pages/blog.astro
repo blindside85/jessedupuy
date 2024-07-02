@@ -1,8 +1,9 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import BlogPost from "../components/BlogPost.astro";
-const allPosts = await Astro.glob("../pages/posts/*.md");
-const title = "blog";
+import { getCollection } from "astro:content";
+import BaseLayout from "@layouts/BaseLayout.astro";
+const blogEntries = await getCollection("posts");
+const title = "posts";
+const tags = [...new Set(blogEntries.map((post) => post.data.tags).flat())];
 ---
 
 <BaseLayout title={title}>
@@ -11,9 +12,33 @@ const title = "blog";
     </p>
     <ul>
         {
-            allPosts.map((post) => (
-                <BlogPost url={post.url} title={post.frontmatter.title} />
+            blogEntries.map((blogPostEntry) => (
+                <li>
+                    <a href={`/posts/${blogPostEntry.slug}`}>
+                        {blogPostEntry.data.title}
+                    </a>
+                    <time datetime={blogPostEntry.data.pubDate.toISOString()}>
+                        {blogPostEntry.data.pubDate.toDateString()}
+                    </time>
+                </li>
             ))
         }
     </ul>
+
+    <h2>tags</h2>
+    <div class="tags">
+        <p>
+            Below is a list of all the tags I've used in my posts to make topics
+            and categories way easier to find:
+        </p>
+        <ul>
+            {
+                tags.map((tag: string) => (
+                    <li class="tag">
+                        <a href={`/tags/${tag}`}>{tag}</a>
+                    </li>
+                ))
+            }
+        </ul>
+    </div>
 </BaseLayout>

@@ -77,10 +77,6 @@ html.dark {
     background-color: #091015;
 }
 
-.dark a {
-    /* color: rgb(255, 79, 152); */
-}
-
 @media (width >=50em) {
     .wrapper main {
         max-width: 50vw;

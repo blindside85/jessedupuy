@@ -1,5 +1,4 @@
 ---
-layout: '../../layouts/MarkdownPostLayout.astro'
 title: 'Kettlebells and code: balancing physical fitness with a tech career'
 pubDate: 2024-06-27
 description: 'Discover how kettlebell workouts can enhance productivity and balance your tech career with physical fitness. Learn efficient exercises and tips for integrating fitness into your busy schedule.'

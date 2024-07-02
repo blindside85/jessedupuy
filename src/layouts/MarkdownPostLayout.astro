@@ -1,26 +1,19 @@
 ---
-import HtmlHead from "../components/HtmlHead.astro";
-import BaseHeader from "../components/BaseHeader.astro";
-import Footer from "../components/Footer.astro";
-import "../styles/core.css";
-interface Frontmatter {
-    title: string;
-    pubDate: string;
-    image?: {
-        url: string;
-        alt: string;
-    };
-    tags: string[];
-}
+import HtmlHead from "@components/HtmlHead.astro";
+import BaseHeader from "@components/BaseHeader.astro";
+import Footer from "@components/Footer.astro";
+import "@styles/core.css";
 
 const { frontmatter } = Astro.props;
-console.log(frontmatter)
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
     <head>
-        <HtmlHead title={'blog: ' + frontmatter.title} desc={frontmatter.description} />
+        <HtmlHead
+            title={"blog: " + frontmatter.title}
+            desc={frontmatter.description}
+        />
     </head>
 
     <body>
@@ -29,7 +22,20 @@ console.log(frontmatter)
             <main>
                 <h1>{frontmatter.title}</h1>
 
-                <p>{frontmatter.pubDate.slice(0, 10)}</p>
+                <p>{frontmatter.pubDate.toString().slice(0, 10)}</p>
+
+                <div class="tags">
+                    <ul>
+                        {
+                            frontmatter.tags.map((tag: string) => (
+                                <li class="tag">
+                                    <a href={`/tags/${tag}`}>{tag}</a>
+                                </li>
+                            ))
+                        }
+                    </ul>
+                </div>
+
                 {
                     frontmatter.image && (
                         <img
@@ -41,19 +47,6 @@ console.log(frontmatter)
                 }
 
                 <slot />
-
-                <div class="tags">
-                    <p>Tags for this post:</p>
-                    <ul>
-                        {
-                            frontmatter.tags.map((tag: string) => (
-                                <li class="tag">
-                                    <a href={`/tags/${tag}`}>{tag}</a>
-                                </li>
-                            ))
-                        }
-                    </ul>
-                </div>
             </main>
             <Footer />
         </div>

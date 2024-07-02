@@ -1,5 +1,6 @@
 {
     "dependencies": {
+        "@astrojs/preact": "^3.5.0",
         "@astrojs/rss": "^4.0.7",
         "astro": "^4.11.3",
         "sharp-ico": "^0.1.5"
