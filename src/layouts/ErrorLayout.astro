@@ -6,7 +6,7 @@ import "@styles/core.css";
 
 let title;
 if (Astro.url.host.includes('localhost')) {
-    title = `LOCAL: ${Astro.props.title}`
+    title = `DEV: ${Astro.props.title}`
 } else {
     title = Astro.props.title;
 }
