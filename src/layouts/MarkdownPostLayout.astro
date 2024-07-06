@@ -34,6 +34,7 @@ if (Astro.url.host.includes('localhost')) {
                         <section class="post-info">
                             <Debug {Astro.url.host} />
                             <Debug {Astro.request.url} />
+                            <Debug {Astro.site} />
                             <h1>{frontmatter.title}</h1>
                             <time datetime={frontmatter.pubDate.toISOString()}>
                                 {frontmatter.pubDate.toDateString()}
