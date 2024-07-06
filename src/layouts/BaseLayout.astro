@@ -5,12 +5,10 @@ import HtmlHead from "@components/HtmlHead.astro";
 import "@styles/core.css";
 let title;
 if (Astro.url.host.includes('localhost')) {
-    title = `LOCAL: ${Astro.props.title}`
+    title = `DEV: ${Astro.props.title}`
 } else {
     title = Astro.props.title;
 }
-console.log(Astro.url.host.indexOf('localhost') > -1)
-console.log(Astro.url.host)
 const desc = "Welcome to my personal site where I share insights on cloud engineering, web development, music, fitness, and more. Join me as I explore the intersection of technology and creativity.";
 ---
 

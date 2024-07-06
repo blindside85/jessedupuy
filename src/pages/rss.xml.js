@@ -2,12 +2,11 @@ import rss from '@astrojs/rss';
 import { getCollection } from 'astro:content';
 
 export async function GET(context) {
-    const currSite = context.site;
     const posts = await getCollection("posts");
     return rss({
         title: 'jessedupuy: blog',
         description: 'My little chunk of the internet',
-        site: currSite,
+        site: context.site,
         items: posts.map((post) => ({
             title: post.data.title,
             pubDate: post.data.pubDate,
