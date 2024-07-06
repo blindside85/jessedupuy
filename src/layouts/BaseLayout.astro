@@ -9,6 +9,8 @@ if (Astro.url.host.includes('localhost')) {
 } else {
     title = Astro.props.title;
 }
+console.log(Astro.url.host.indexOf('localhost') > -1)
+console.log(Astro.url.host)
 const desc = "Welcome to my personal site where I share insights on cloud engineering, web development, music, fitness, and more. Join me as I explore the intersection of technology and creativity.";
 ---
 
