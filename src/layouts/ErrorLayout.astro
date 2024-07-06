@@ -2,23 +2,25 @@
 import HtmlHead from "@components/HtmlHead.astro";
 import BaseHeader from "@components/BaseHeader.astro";
 import Footer from "@components/Footer.astro";
+import Icons from "@components/Icons.astro";
 import "@styles/core.css";
 
 let title;
-if (Astro.url.host.includes('localhost')) {
-    title = `DEV: ${Astro.props.title}`
+if (Astro.url.host.includes("localhost")) {
+    title = `DEV: ${Astro.props.title}`;
 } else {
     title = Astro.props.title;
 }
 const desc = "Error encountered, please return to the homepage";
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
     <head>
         <HtmlHead {title} {desc} />
     </head>
     <body>
+        <Icons />
         <div class="wrapper">
             <BaseHeader {title} />
             <main>

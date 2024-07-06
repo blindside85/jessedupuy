@@ -2,29 +2,26 @@
 import HtmlHead from "@components/HtmlHead.astro";
 import BaseHeader from "@components/BaseHeader.astro";
 import Footer from "@components/Footer.astro";
+import Icons from "@components/Icons.astro";
 import "@styles/core.css";
-
 
 const { frontmatter } = Astro.props;
 let title;
-if (Astro.url.host.includes('localhost')) {
-    title = `DEV: blog: ${frontmatter.title}`
+if (Astro.url.host.includes("localhost")) {
+    title = `DEV: blog: ${frontmatter.title}`;
 } else {
     title = `blog: ${frontmatter.title}`;
 }
-
 ---
 
 <!doctype html>
 <html lang="en">
     <head>
-        <HtmlHead
-            {title}
-            desc={frontmatter.description}
-        />
+        <HtmlHead {title} desc={frontmatter.description} />
     </head>
 
     <body>
+        <Icons />
         <div class="wrapper">
             <BaseHeader title={frontmatter.title} />
             <main>
@@ -40,7 +37,9 @@ if (Astro.url.host.includes('localhost')) {
                                     {
                                         frontmatter.tags.map((tag: string) => (
                                             <li class="tag">
-                                                <a href={`/tags/${tag}`}>{tag}</a>
+                                                <a href={`/tags/${tag}`}>
+                                                    {tag}
+                                                </a>
                                             </li>
                                         ))
                                     }
@@ -60,7 +59,6 @@ if (Astro.url.host.includes('localhost')) {
                     <section class="post-content">
                         <slot />
                     </section>
-
                 </article>
             </main>
             <Footer />

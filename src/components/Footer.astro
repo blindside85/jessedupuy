@@ -2,6 +2,68 @@
 const currYear = new Date().getFullYear();
 ---
 
+<style>
+    footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    footer p {
+        margin: 0;
+    }
+    .social {
+        padding: 0;
+        margin-left: 3rem;
+        font-size: 2em;
+    }
+    .social li {
+        display: inline-block;
+        list-style: none;
+    }
+    .social a {
+        padding: 0.5rem;
+    }
+</style>
+
 <footer>
     <p>&copy;{currYear} Jesse Dupuy</p>
+    <ul class="social">
+        <li>
+            <a href="https://github.com/blindside85/" target="_blank">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    id="rss"
+                    width="1em"
+                    height="1em"
+                    viewBox="0 0 24 24"
+                >
+                    <use xlink:href="#gh"></use>
+            </svg>
+            </a>
+        </li><li>
+            <a href="https://www.linkedin.com/in/jessedupuy/" target="_blank">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    id="rss"
+                    width="1em"
+                    height="1em"
+                    viewBox="0 0 24 24"
+                >
+                    <use xlink:href="#li"></use>
+                </svg>
+            </a>
+        </li><li>
+            <a href="/rss.xml">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    id="rss"
+                    width="1em"
+                    height="1em"
+                    viewBox="0 0 24 24"
+                >
+                    <use xlink:href="#rss"></use>
+                </svg>
+            </a>
+        </li>
+    </ul>
 </footer>
