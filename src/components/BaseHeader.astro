@@ -24,7 +24,7 @@ import ThemeIcon from "./ThemeIcon.astro";
     }
     nav li {
         display: inline-block;
-        margin: 0;
+        margin: 0 0.2rem 0;
     }
     nav a {
         padding: 0.5rem 1rem;
@@ -46,12 +46,12 @@ import ThemeIcon from "./ThemeIcon.astro";
 
     <nav class="navigation">
         <ol>
-            <li><a title="go back home" href="/">home</a></li>
-            <li><a title="read my blog" href="/blog">blog</a></li>
             <li>
-                <a title="play with the calendar of life" href="/cal-of-life"
-                    >calendar of life</a
-                >
+                <a title="go back home" href="/">home</a>
+            </li><li>
+                <a title="read my blog" href="/blog">blog</a>
+            </li><li>
+                <a title="calendar of life" href="/cal-of-life">calendar of life</a>
             </li>
         </ol>
     </nav>
