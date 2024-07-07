@@ -11,6 +11,7 @@ html {
     background-image: url(../images/natural-white.webp);
     background-color: #ebe8e7;
     background-position: 0px 0px;
+    color: #283739;
 }
 
 body {
@@ -26,7 +27,7 @@ h4,
 h5,
 h6 {
     font-family: Arial, Helvetica, sans-serif;
-    font-weight: 400;
+    font-weight: bold;
     line-height: 1.2;
     margin: 0 0 1rem;
 }
@@ -40,7 +41,19 @@ p {
 }
 
 a {
+    color: #ebe8e7;
     text-decoration: none;
+}
+a:hover,
+a:visited:hover {
+    color: gray;
+}
+a:active,
+a:visited:active {
+    color: #091015;
+}
+a:visited {
+    color: #2c5d63;
 }
 
 main a:hover {
@@ -71,14 +84,39 @@ main a:hover {
 
 .wrapper footer {
     grid-area: footer;
-
     font-size: 0.8em;
 }
 
+/* DARK MODE STYLING */
 html.dark {
-    color: #f0f0f0;
+    color: #ebe8e7;
     background-image: url(../images/natural-black.webp);
     background-color: #091015;
+}
+
+html.dark a {
+    color: gray;
+    text-decoration: none;
+}
+html.dark a:hover,
+html.dark a:visited:hover {
+    color: silver;
+}
+html.dark a:active,
+html.dark a:visited:active {
+    color: #ebe8e7;
+}
+html.dark a:visited {
+    color: #a2c11c;
+}
+
+html.dark h1,
+html.dark h2,
+html.dark h3,
+html.dark h4,
+html.dark h5,
+html.dark h6 {
+    color:  #2c5d63;
 }
 
 @media (width >=50em) {
