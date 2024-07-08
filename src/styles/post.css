@@ -1,0 +1,10 @@
+.post-tags ul {
+    padding: 0;
+}
+.post-tags li {
+    display: inline-block;
+    list-style: none;
+}
+.post-tags a {
+    padding: 0.5rem;
+}

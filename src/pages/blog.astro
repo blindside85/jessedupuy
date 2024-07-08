@@ -1,6 +1,8 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "@layouts/BaseLayout.astro";
+import "@components/Icons.astro";
+import TagLink from "@components/TagLink.astro";
 const blogEntries = await getCollection("posts");
 const title = "posts";
 const tags = [...new Set(blogEntries.map((post) => post.data.tags).flat())];
@@ -35,7 +37,7 @@ const tags = [...new Set(blogEntries.map((post) => post.data.tags).flat())];
             {
                 tags.map((tag: string) => (
                     <li class="tag">
-                        <a href={`/tags/${tag}`}>{tag}</a>
+                        <TagLink {tag} />
                     </li>
                 ))
             }
