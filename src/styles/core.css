@@ -30,6 +30,7 @@ h6 {
     font-weight: bold;
     line-height: 1.2;
     margin: 0 0 1rem;
+    color: #2c5d63;
 }
 
 h1 {
@@ -41,16 +42,16 @@ p {
 }
 
 a {
-    color: #ebe8e7;
+    color: gray;
     text-decoration: none;
 }
 a:hover,
 a:visited:hover {
-    color: gray;
+    color: #091015;
 }
 a:active,
 a:visited:active {
-    color: #091015;
+    color: #2c5d63;
 }
 a:visited {
     color: #2c5d63;
@@ -87,6 +88,14 @@ main a:hover {
     font-size: 0.8em;
 }
 
+/* BLOG PAGE */
+.tags ul {
+    padding: 0;
+}
+.tags li {
+    list-style: none;
+}
+
 /* DARK MODE STYLING */
 html.dark {
     color: #ebe8e7;
@@ -116,7 +125,7 @@ html.dark h3,
 html.dark h4,
 html.dark h5,
 html.dark h6 {
-    color:  #2c5d63;
+    color:  #a2c11c;
 }
 
 @media (width >=50em) {

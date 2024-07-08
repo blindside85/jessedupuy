@@ -1,0 +1,15 @@
+---
+const { tag } = Astro.props;
+---
+<a href={`/tags/${tag}`}>
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        id="rss"
+        width="1em"
+        height="1em"
+        viewBox="0 0 24 24"
+    >
+        <use xlink:href="#tag" />
+    </svg>
+    {tag}
+</a>
