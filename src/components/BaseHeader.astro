@@ -3,20 +3,26 @@ import ThemeIcon from "./ThemeIcon.astro";
 ---
 
 <style>
+    .header {
+        position: relative;
+        width: 100%;
+    }
     .logo {
-        display: inline-block;
+        display: block;
+        position: relative;
+        width: 5rem;
         font-weight: 700;
         text-decoration: none;
-        padding: 1rem;
-        margin-top: 1rem;
+        margin: 1rem auto 0;
         color: inherit;
     }
 
     header {
-        margin-bottom: 4rem;
+        margin-bottom: 2rem;
     }
     nav {
         margin-top: 1rem;
+        text-align: center;
     }
     nav ol {
         margin: 0;
@@ -44,13 +50,20 @@ import ThemeIcon from "./ThemeIcon.astro";
         background-color: rgba(235, 232, 231, 0.1);
     }
     html.dark nav li a:hover {
-        background-color: rgba(235, 232, 231, 0.5)
+        background-color: rgba(235, 232, 231, 0.5);
     }
 </style>
 
 <header>
     <a href="/" title="return to the homepage" class="logo">
-        jessedupuy.me ¯\_(ツ)_/¯
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            id="me"
+            viewBox="0 0 257.545 383.123"
+        >
+            <title>Jesse Dupuy</title>
+            <use xlink:href="#me"></use>
+        </svg>
     </a>
 
     <ThemeIcon />
@@ -62,7 +75,8 @@ import ThemeIcon from "./ThemeIcon.astro";
             </li><li>
                 <a title="read my blog" href="/blog">blog</a>
             </li><li>
-                <a title="calendar of life" href="/cal-of-life">calendar of life</a>
+                <a title="calendar of life" href="/cal-of-life"
+                    >calendar of life</a>
             </li>
         </ol>
     </nav>
