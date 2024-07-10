@@ -79,8 +79,7 @@ main a:hover {
 .wrapper main {
     position: relative;
     grid-area: content;
-    min-width: 60vw;
-    flex: 50vw 0 auto;
+    flex: 35vw 0 auto;
 }
 
 .wrapper footer {
@@ -128,8 +127,16 @@ html.dark h6 {
     color:  #a2c11c;
 }
 
-@media (width >=50em) {
+/* mid-size views */
+@media (width >=35em) {
     .wrapper main {
-        max-width: 50vw;
+        max-width: 60vw;
+    }
+}
+
+/* largest views */
+@media (width >=55em) {
+    .wrapper main {
+        max-width: 37vw;
     }
 }
