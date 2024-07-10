@@ -18,6 +18,8 @@ body {
     display: flex;
     justify-content: center;
     padding: 0 1rem;
+    font-size: 1rem;
+    line-height: 1.5;
 }
 
 h1,
@@ -26,10 +28,7 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: bold;
-    line-height: 1.2;
-    margin: 0 0 1rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #2c5d63;
 }
 
@@ -37,22 +36,39 @@ h1 {
     font-size: 1.8em;
 }
 
-p {
-    font: 1.1em/1.3em Times, serif;
+h2 {
+    margin-top: 2.2em;
+    margin-bottom: 1em;
+}
+
+h3 {
+    margin-top: 1.5em;
+    margin-bottom: 0.7em;
+}
+
+li {
+    margin-bottom: 0.5em;
+}
+
+li:last-of-type {
+    margin-bottom: 0;
 }
 
 a {
     color: gray;
     text-decoration: none;
 }
+
 a:hover,
 a:visited:hover {
     color: #091015;
 }
+
 a:active,
 a:visited:active {
     color: #2c5d63;
 }
+
 a:visited {
     color: #2c5d63;
 }
@@ -91,6 +107,7 @@ main a:hover {
 .tags ul {
     padding: 0;
 }
+
 .tags li {
     list-style: none;
 }
@@ -106,14 +123,17 @@ html.dark a {
     color: gray;
     text-decoration: none;
 }
+
 html.dark a:hover,
 html.dark a:visited:hover {
     color: silver;
 }
+
 html.dark a:active,
 html.dark a:visited:active {
     color: #ebe8e7;
 }
+
 html.dark a:visited {
     color: #a2c11c;
 }
@@ -124,19 +144,31 @@ html.dark h3,
 html.dark h4,
 html.dark h5,
 html.dark h6 {
-    color:  #a2c11c;
+    color: #a2c11c;
 }
 
-/* mid-size views */
-@media (width >=35em) {
+@media (min-width: 35em) {
+    .wrapper main {
+        max-width: 70vw;
+    }
+}
+
+@media (min-width: 48em) {
+    :root {
+        font-size: calc(1rem + ((1vw - 0.48rem) * 1.4));
+    }
+
     .wrapper main {
         max-width: 60vw;
     }
 }
 
-/* largest views */
-@media (width >=55em) {
+@media (min-width: 70em) {
+    :root {
+        font-size: 1.2em;
+    }
+
     .wrapper main {
-        max-width: 37vw;
+        max-width: 35rem;
     }
 }
