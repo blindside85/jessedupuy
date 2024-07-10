@@ -48,25 +48,30 @@
         }
     ];
 
-
     let params = new URLSearchParams(url.search);
 
     if (params.has('bday')) {
         bdayInput.value = params.get('bday');
     }
 
-    let bday = bdayInput.valueAsDate;
-    let currAge = Math.floor((today - bday) / yearMillis);
-    let bdayWeekNum = getWeekNum(bday);
+    let bday, currAge, bdayWeekNum;
+    setBdayValues(bdayInput.valueAsDate);
 
     bdayInput.addEventListener('change', evt => {
-        bday = evt.target.valueAsDate;
-        currAge = Math.floor((today - bday) / yearMillis);
-        bdayWeekNum = getWeekNum(bday);
+        setBdayValues(evt.target.valueAsDate);
         setDataText();
         updateParams();
         renderCal();
     });
+
+    function setBdayValues(bdayDate) {
+        // edge case: avoid breaking on impossible dates like 02/30
+        if (bdayDate === null) return;
+        // edge case: avoid bday being set to 12/31/1999 when the input is set to 1/1/2000
+        bday = new Date(bdayDate.getUTCFullYear(), bdayDate.getUTCMonth(), bdayDate.getUTCDate());
+        currAge = Math.floor((today - bday) / yearMillis);
+        bdayWeekNum = getWeekNum(bday);
+    }
 
     function getWeekNum(day) {
         const firstDayOfYear = new Date(day.getFullYear(), 0, 1);
@@ -156,7 +161,7 @@
                 const rowY = bubbleStartY + year * (bubbleRadius * 2.5);
 
                 for (let week = 1; week <= weeksPerYear; week++) {
-                    if (year === 0 && week > bdayWeekNum || year < currAge && year > 0 || year === currAge && week < currWeekNum) {
+                    if (year === 0 && week >= bdayWeekNum || year < currAge && year > 0 || year === currAge && week < currWeekNum) {
                         // fill in bubbles of weeks lived
                         fillCircle(bubbleStartX + week * (bubbleRadius * 2), rowY, bubbleRadius - bubbleSpacing, 1, stageColor, stageColor);
                     } else {
