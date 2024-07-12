@@ -1,212 +1,178 @@
-((win, doc) => {
-    const url = new URL(win.location.href);
-    const canvas = doc.querySelector('canvas');
-    const originalHeight = canvas.height;
-    const originalWidth = canvas.width;
-    const ctx = canvas.getContext('2d');
-    const bdayInput = document.querySelector('input');
-    const dataText = document.querySelector('.life-math');
-    const dayMillis = 1000 * 60 * 60 * 24; // = 86400000
-    const yearMillis = dayMillis * 365;
-    const today = new Date();
-    const currWeekNum = getWeekNum(today);
-    const weeksPerYear = 52;
-    const yearsPerLife = 77; // average life expectancy in the US in 2023 for males
+import { LifeTracker } from "./life-tracker.js";
 
-    const bubbleRadius = canvas.width * 0.008;
-    const bubbleSpacing = canvas.width * 0.002;
-    const bubbleStartX = bubbleRadius * 3;
-    const bubbleStartY = bubbleRadius * 2;
-    const labelX = bubbleStartX + (weeksPerYear + 1) * (bubbleRadius * 2);
+const bdayInput = document.querySelector("input");
+const dataText = document.querySelector(".life-math");
 
-    const px = 20 - (((1366 - canvas.width) / 1366) * 20);
+const tracker = new LifeTracker();
 
-    const stages = [
-        {
-            name: 'childhood',
-            years: [0, 12]
-        },
-        {
-            name: 'adolescence',
-            years: [13, 19]
-        },
-        {
-            name: 'early adulthood',
-            years: [20, 34]
-        },
-        {
-            name: 'middle adulthood',
-            years: [35, 49]
-        },
-        {
-            name: 'mature adulthood',
-            years: [50, 79]
-        },
-        {
-            name: 'late adulthood',
-            years: [80, 100]
-        }
-    ];
+const canvas = document.querySelector("canvas");
+const originalHeight = canvas.height;
+const originalWidth = canvas.width;
+const ctx = canvas.getContext("2d");
 
-    let params = new URLSearchParams(url.search);
+const bubbleRadius = canvas.width * 0.008;
+const bubbleSpacing = canvas.width * 0.002;
+const bubbleStartX = bubbleRadius * 3;
+const bubbleStartY = bubbleRadius * 2;
+const labelX = bubbleStartX + (tracker.weeksPerYear + 1) * (bubbleRadius * 2);
 
-    if (params.has('bday')) {
-        bdayInput.value = params.get('bday');
+const px = 20 - ((1366 - canvas.width) / 1366) * 20;
+
+if (tracker.params.has("bday")) {
+  bdayInput.value = tracker.params.get("bday");
+}
+
+tracker.setBdayValues(bdayInput.valueAsDate);
+
+bdayInput.addEventListener("change", (evt) => {
+  tracker.setBdayValues(evt.target.valueAsDate);
+  setDataText();
+  tracker.updateParams(bdayInput);
+  renderCal();
+});
+
+function setDataText() {
+  const lifeWeeks =
+    tracker.weeksPerYear * tracker.currAge - tracker.bdayWeekNum;
+  const totalWeeks = tracker.weeksPerYear * tracker.yearsPerLife;
+  const lifePercentage = ((lifeWeeks / totalWeeks) * 100).toPrecision(3);
+  dataText.innerHTML = `You've lived ${lifeWeeks.toLocaleString()} weeks (${lifePercentage}%) of the ${totalWeeks.toLocaleString()} possible weeks of an average ${tracker.yearsPerLife}-year human life.`;
+}
+
+function fillCircle(midX, midY, radius, strokeWidth, fillColor, strokeColor) {
+  ctx.beginPath();
+  ctx.arc(midX, midY, radius, 0, 2 * Math.PI, false);
+  ctx.fillStyle = fillColor;
+  ctx.fill();
+  ctx.lineWidth = strokeWidth;
+  ctx.strokeStyle = strokeColor;
+  ctx.stroke();
+}
+
+function printStageLabels(labelY, stageColor, stageName) {
+  ctx.fillStyle = stageColor;
+  ctx.font = `${px}px Arial`;
+  ctx.textAlign = "left";
+  ctx.save();
+  ctx.translate(labelX, labelY - bubbleRadius);
+  ctx.rotate(Math.PI / 2);
+  ctx.fillText(`${stageName}`, 0, 0);
+  ctx.restore();
+}
+
+function printYearLabels(rowY, year, stageColor) {
+  ctx.fillStyle = stageColor;
+  ctx.font = `${px}px Arial`;
+  ctx.textAlign = "right";
+  ctx.fillText(year, bubbleStartX, rowY + bubbleSpacing * 2);
+}
+
+function renderCal() {
+  let dimensions = getObjectFitSize(
+    true,
+    canvas.clientWidth,
+    canvas.clientHeight,
+    canvas.width,
+    canvas.height,
+  );
+  const dpr = window.devicePixelRatio || 1;
+  canvas.width = dimensions.width * dpr;
+  canvas.height = dimensions.height * dpr;
+
+  let ratio = Math.min(
+    canvas.clientWidth / originalWidth,
+    canvas.clientHeight / originalHeight,
+  );
+  ctx.scale(ratio * dpr, ratio * dpr);
+
+  // ensure the canvas is cleared before rendering
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  ctx.fillStyle = "currentColor";
+  ctx.font = "2em Arial";
+
+  for (const [idx, stage] of tracker.lifeStages.entries()) {
+    // auto-skip stages that are outside of the life span
+    if (stage.years[0] >= tracker.yearsPerLife) {
+      return;
     }
 
-    let bday, currAge, bdayWeekNum;
-    setBdayValues(bdayInput.valueAsDate);
+    const labelY = bubbleStartY + stage.years[0] * (bubbleRadius * 2.5);
+    const stageColor = `hsl(${(idx + 1) * Math.ceil((Math.random() * Date.now()) / 100000)}, 40%, 50%)`;
 
-    bdayInput.addEventListener('change', evt => {
-        setBdayValues(evt.target.valueAsDate);
-        setDataText();
-        updateParams();
-        renderCal();
-    });
+    printStageLabels(labelY, stageColor, stage.name);
 
-    function setBdayValues(bdayDate) {
-        // edge case: avoid breaking on impossible dates like 02/30
-        if (bdayDate === null) return;
-        // edge case: avoid bday being set to 12/31/1999 when the input is set to 1/1/2000
-        bday = new Date(bdayDate.getUTCFullYear(), bdayDate.getUTCMonth(), bdayDate.getUTCDate());
-        currAge = Math.floor((today - bday) / yearMillis);
-        bdayWeekNum = getWeekNum(bday);
-    }
-
-    function getWeekNum(day) {
-        const firstDayOfYear = new Date(day.getFullYear(), 0, 1);
-        const daysSinceFirstDayOfYear = (day - firstDayOfYear) / dayMillis;
-        const daysSinceFirstDayOfWeek = daysSinceFirstDayOfYear + firstDayOfYear.getDay() + 1;
-        return Math.ceil(daysSinceFirstDayOfWeek / 7);
-    };
-
-    function updateParams() {
-        params.set('bday', bdayInput.value);
-        url.search = params.toString();
-        history.replaceState({}, 'durr', url);
-    }
-
-    function setDataText() {
-        const lifeWeeks = weeksPerYear * currAge - bdayWeekNum;
-        const totalWeeks = weeksPerYear * yearsPerLife;
-        const lifePercentage = (lifeWeeks / totalWeeks * 100).toPrecision(3);
-        dataText.innerHTML = `You've lived ${lifeWeeks.toLocaleString()} weeks (${lifePercentage}%) of the ${totalWeeks.toLocaleString()} possible weeks of an average ${yearsPerLife}-year human life.`;
-    }
-
-    function fillCircle(midX, midY, radius, strokeWidth, fillColor, strokeColor) {
-        ctx.beginPath();
-        ctx.arc(midX, midY, radius, 0, 2 * Math.PI, false);
-        ctx.fillStyle = fillColor;
-        ctx.fill();
-        ctx.lineWidth = strokeWidth;
-        ctx.strokeStyle = strokeColor;
-        ctx.stroke();
-    }
-
-    function printStageLabels(labelY, stageColor, stageName) {
-        ctx.fillStyle = stageColor;
-        ctx.font = `${px}px Arial`;
-        ctx.textAlign = 'left';
-        ctx.save();
-        ctx.translate(labelX, labelY - bubbleRadius);
-        ctx.rotate(Math.PI / 2);
-        ctx.fillText(`${stageName}`, 0, 0);
-        ctx.restore();
-    }
-
-    function printYearLabels(rowY, year, stageColor) {
-        ctx.fillStyle = stageColor;
-        ctx.font = `${px}px Arial`;
-        ctx.textAlign = 'right';
-        ctx.fillText(year, bubbleStartX, rowY + bubbleSpacing * 2);
-    }
-
-    function renderCal() {
-        let dimensions = getObjectFitSize(
-            true,
-            canvas.clientWidth,
-            canvas.clientHeight,
-            canvas.width,
-            canvas.height
-        );
-        const dpr = window.devicePixelRatio || 1;
-        canvas.width = dimensions.width * dpr;
-        canvas.height = dimensions.height * dpr;
-
-        let ratio = Math.min(
-            canvas.clientWidth / originalWidth,
-            canvas.clientHeight / originalHeight
-        );
-        ctx.scale(ratio * dpr, ratio * dpr);
-
-        // ensure the canvas is cleared before rendering
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        ctx.fillStyle = 'currentcolor';
-        ctx.font = '2em Arial';
-
-        for (const [idx, stage] of stages.entries()) {
-            // auto-skip stages that are outside of the life span
-            if (stage.years[0] >= yearsPerLife) {
-                return;
-            }
-
-            const labelY = bubbleStartY + stage.years[0] * (bubbleRadius * 2.5);
-            const stageColor = `hsl(${(idx + 1) * Math.ceil(Math.random() * Date.now() / 100000)}, 40%, 50%)`;
-
-            printStageLabels(labelY, stageColor, stage.name);
-
-            // handle individual years
-            for (let year = stage.years[0]; year <= stage.years[1] && year <= yearsPerLife; year++) {
-                const rowY = bubbleStartY + year * (bubbleRadius * 2.5);
-
-                for (let week = 1; week <= weeksPerYear; week++) {
-                    if (year === 0 && week >= bdayWeekNum || year < currAge && year > 0 || year === currAge && week < currWeekNum) {
-                        // fill in bubbles of weeks lived
-                        fillCircle(bubbleStartX + week * (bubbleRadius * 2), rowY, bubbleRadius - bubbleSpacing, 1, stageColor, stageColor);
-                    } else {
-                        // empty bubbles for weeks not lived
-                        fillCircle(bubbleStartX + week * (bubbleRadius * 2), rowY, bubbleRadius - bubbleSpacing, 1, 'transparent', stageColor);
-                    }
-                }
-
-                printYearLabels(rowY, year, stageColor);
-            }
-        }
-    }
-
-    // adapted from: https://www.npmjs.com/package/intrinsic-scale
-    function getObjectFitSize(
-        contains /* true = contain, false = cover */,
-        containerWidth,
-        containerHeight,
-        width,
-        height
+    // handle individual years
+    for (
+      let year = stage.years[0];
+      year <= stage.years[1] && year <= tracker.yearsPerLife;
+      year++
     ) {
-        var doRatio = width / height;
-        var cRatio = containerWidth / containerHeight;
-        var targetWidth = 0;
-        var targetHeight = 0;
-        var test = contains ? doRatio > cRatio : doRatio < cRatio;
+      const rowY = bubbleStartY + year * (bubbleRadius * 2.5);
 
-        if (test) {
-            targetWidth = containerWidth;
-            targetHeight = targetWidth / doRatio;
+      for (let week = 1; week <= tracker.weeksPerYear; week++) {
+        if (
+          (year === 0 && week >= tracker.bdayWeekNum) ||
+          (year < tracker.currAge && year > 0) ||
+          (year === tracker.currAge && week < tracker.currWeekNum)
+        ) {
+          // fill in bubbles of weeks lived
+          fillCircle(
+            bubbleStartX + week * (bubbleRadius * 2),
+            rowY,
+            bubbleRadius - bubbleSpacing,
+            1,
+            stageColor,
+            stageColor,
+          );
         } else {
-            targetHeight = containerHeight;
-            targetWidth = targetHeight * doRatio;
+          // empty bubbles for weeks not lived
+          fillCircle(
+            bubbleStartX + week * (bubbleRadius * 2),
+            rowY,
+            bubbleRadius - bubbleSpacing,
+            1,
+            "transparent",
+            stageColor,
+          );
         }
+      }
 
-        return {
-            width: targetWidth,
-            height: targetHeight,
-            x: (containerWidth - targetWidth) / 2,
-            y: (containerHeight - targetHeight) / 2
-        };
+      printYearLabels(rowY, year, stageColor);
     }
+  }
+}
 
-    canvas.height = (bubbleRadius * 2 + bubbleSpacing * 3) * yearsPerLife;
-    setDataText();
-    renderCal();
+// adapted from: https://www.npmjs.com/package/intrinsic-scale
+function getObjectFitSize(
+  contains /* true = contain, false = cover */,
+  containerWidth,
+  containerHeight,
+  width,
+  height,
+) {
+  var doRatio = width / height;
+  var cRatio = containerWidth / containerHeight;
+  var targetWidth = 0;
+  var targetHeight = 0;
+  var test = contains ? doRatio > cRatio : doRatio < cRatio;
 
-})(window, document);
+  if (test) {
+    targetWidth = containerWidth;
+    targetHeight = targetWidth / doRatio;
+  } else {
+    targetHeight = containerHeight;
+    targetWidth = targetHeight * doRatio;
+  }
+
+  return {
+    width: targetWidth,
+    height: targetHeight,
+    x: (containerWidth - targetWidth) / 2,
+    y: (containerHeight - targetHeight) / 2,
+  };
+}
+
+canvas.height = (bubbleRadius * 2 + bubbleSpacing * 3) * tracker.yearsPerLife;
+setDataText();
+renderCal();
