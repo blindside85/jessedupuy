@@ -58,15 +58,15 @@ function renderGraph() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   // Base offset distance of 10
-  const offset = 15;
+  const offset = 8;
   let beginAngle = 0;
   let endAngle = 0;
 
   // Used to calculate the X and Y offset
   let offsetX, offsetY, medianAngle;
 
-  const canvasMidX = canvas.width / 3.3;
-  const canvasMidY = canvas.height / 3.3;
+  const canvasMidX = canvas.width / 5.8;
+  const canvasMidY = canvas.height / 5.8;
 
   ctx.fillStyle = "currentColor";
   ctx.font = "0.5em Arial";
