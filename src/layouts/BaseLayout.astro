@@ -1,8 +1,9 @@
 ---
-import BaseHeader from "@components/BaseHeader.astro";
-import Footer from "@components/Footer.astro";
 import HtmlHead from "@components/HtmlHead.astro";
 import Icons from "@components/Icons.astro";
+import BodyTop from "@components/BodyTop.astro";
+import BaseHeader from "@components/BaseHeader.astro";
+import Footer from "@components/Footer.astro";
 import "@styles/core.css";
 let title;
 if (Astro.url.host.includes("localhost")) {
@@ -10,7 +11,9 @@ if (Astro.url.host.includes("localhost")) {
 } else {
     title = Astro.props.title;
 }
-const desc = "Welcome to my personal site where I share insights on cloud engineering, web development, music, fitness, and more. Join me as I explore the intersection of technology and creativity.";
+const desc =
+    "Welcome to my personal site where I share insights on cloud engineering, web development, music, fitness, and more. Join me as I explore the intersection of technology and creativity.";
+const msg = "Thanks for visiting!";
 ---
 
 <!doctype html>
@@ -20,6 +23,7 @@ const desc = "Welcome to my personal site where I share insights on cloud engine
     </head>
     <body>
         <Icons />
+        <BodyTop {msg} />
         <div class="wrapper">
             <BaseHeader title={title} />
             <main>
