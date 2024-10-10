@@ -1,0 +1,59 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import "@styles/recommends.css";
+import Recommendation from "@components/Recommendation.astro";
+import recommendations from "@data/recommends.json";
+
+const title = "things I like";
+---
+
+<style>
+  section {
+    display: flex;
+    border-top: 1px solid var(--color-dark-gray);
+    padding: 4rem 0;
+  }
+  section:last-child {
+    padding-bottom: 0;
+  }
+  h2 {
+    margin: 0;
+    min-width: 30%;
+    font-size: 1.1em;
+  }
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+</style>
+
+<BaseLayout title={title}>
+  <p>
+    I've cultivated and curated a large collection of tools, toys, and other
+    things that bring me joy over the years. Some help make my job better, some
+    just make life more fun (or at least bearable). I'm willing to bet they'll
+    make yours better, too.
+  </p>
+  {
+    recommendations.length ? (
+      recommendations.map((section: any) => (
+        <section>
+          <h2>{section.name}</h2>
+          <ul>
+            {section.items.map((item: any) => (
+              <li>
+                <Recommendation {item} />
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))
+    ) : (
+      <>
+        <hr />
+        <em>No recommendations to share yet!</em>
+      </>
+    )
+  }
+</BaseLayout>
