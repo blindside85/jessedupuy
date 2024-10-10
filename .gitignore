@@ -1,4 +1,4 @@
-.astro/
-.cache/
-dist/
-node_modules/
+.astro/*
+.cache/*
+dist/*
+node_modules/*
