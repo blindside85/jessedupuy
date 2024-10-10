@@ -1,0 +1,14 @@
+:root {
+  --color-near-black: #091015;
+  --color-dark-gray: #283739;
+  --color-gray: #999;
+  --color-light-gray: #ebe8e7;
+  --color-light-gray-10: rgba(9, 16, 21, 0.1);
+  --color-light-gray-50: rgba(9, 16, 21, 0.1);
+  --color-near-white-10: rgba(235, 232, 231, 0.1);
+  --color-near-white-50: rgba(235, 232, 231, 0.5);
+  --color-white-50: rgba(255, 255, 255, 0.5);
+  --color-black-50: rgba(0, 0, 0, 0.5);
+  --color-dark-accent: #ffc46b;
+  --color-light-accent: --color-dark-gray;
+}

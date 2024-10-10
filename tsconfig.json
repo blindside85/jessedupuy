@@ -1,17 +1,19 @@
 {
-    "extends": "astro/tsconfigs/strictest",
-    "compilerOptions": {
-        "baseUrl": ".",
-        "paths": {
-          "@components/*": ["src/components/*"],
-          "@layouts/*": ["src/layouts/*"],
-          "@styles/*": ["src/styles/*"],
-          "@images/*": ["src/images/*"],
-        },
-        "jsx": "react",
-        "esModuleInterop": true,
-        "strictNullChecks": true,
-        "allowJs": true,
-        "verbatimModuleSyntax": true
-    }
+  "extends": "astro/tsconfigs/strictest",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": ["src/components/*"],
+      "@layouts/*": ["src/layouts/*"],
+      "@styles/*": ["src/styles/*"],
+      "@scripts/*": ["src/scripts/*"],
+      "@data/*": ["src/data/*"],
+      "@images/*": ["src/images/*"]
+    },
+    "jsx": "react",
+    "esModuleInterop": true,
+    "strictNullChecks": true,
+    "allowJs": true,
+    "verbatimModuleSyntax": true
+  }
 }
