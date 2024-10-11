@@ -2,85 +2,86 @@
 import ThemeIcon from "./ThemeIcon.astro";
 ---
 
-<style>
-    .header {
-        position: relative;
-        width: 100%;
-    }
-    .logo {
-        display: block;
-        position: relative;
-        width: 5rem;
-        font-weight: 700;
-        text-decoration: none;
-        margin: 1rem auto 0;
-        color: inherit;
-    }
+<style is:global>
+  .header {
+    position: relative;
+    width: 100%;
+  }
+  a.logo {
+    display: block;
+    position: relative;
+    width: 5rem;
+    font-weight: 700;
+    text-decoration: none;
+    margin: 1rem auto 0;
+    color: inherit;
+  }
+  a.logo svg {
+    fill: var(--color-light-gray);
+  }
 
-    header {
-        margin-bottom: 2rem;
-    }
-    nav {
-        margin-top: 1rem;
-        text-align: center;
-    }
-    nav ol {
-        margin: 0;
-        padding: 0;
-    }
-    nav li {
-        display: inline-block;
-        margin: 0.5rem 0.2rem;
-    }
+  header {
+    margin-bottom: 2rem;
+  }
+  nav {
+    margin-top: 1rem;
+    text-align: center;
+  }
+  nav ol {
+    margin: 0;
+    padding: 0;
+  }
+  nav li {
+    display: inline-block;
+    margin: 0.5rem 0.2rem;
+  }
+  nav a {
+    padding: 0.5rem 1rem;
+    border-radius: 0.2rem;
+    color: var(--color-near-black);
+    background-color: var(--color-light-gray-10);
+    transition: background-color 0.2s ease;
+    text-decoration: none;
+  }
+  nav a:hover,
+  nav a:visited:hover {
+    color: var(--color-light-gray);
+    background-color: var(--color-light-gray-50);
+  }
+
+  html[data-theme="dark"] {
     nav a {
-        padding: 0.5rem 1rem;
-        border-radius: 0.2rem;
-        color: #091015;
-        background-color: rgba(9, 16, 21, 0.1);
-        transition: background-color 0.2s ease;
+      color: var(--color-light-gray);
+      background-color: var(--color-near-white-10);
     }
     nav a:hover,
     nav a:visited:hover {
-        color: #ebe8e7;
-        background-color: rgba(9, 16, 21, 0.5);
+      background-color: var(--color-near-white-50);
     }
-
-    html.dark nav li a {
-        color: #ebe8e7;
-        background-color: rgba(235, 232, 231, 0.1);
-    }
-    html.dark nav li a:hover {
-        background-color: rgba(235, 232, 231, 0.5);
-    }
+  }
 </style>
 
 <header>
-    <a href="/" title="return to the homepage" class="logo">
-        <svg
-            xmlns="http://www.w3.org/2000/svg"
-            id="me"
-            viewBox="0 0 257.545 383.123"
-        >
-            <title>Jesse Dupuy</title>
-            <use xlink:href="#me"></use>
-        </svg>
-    </a>
+  <a href="/" title="return to the homepage" class="logo">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 257.545 383.123">
+      <title>Jesse Dupuy</title>
+      <use href="#me"></use>
+    </svg>
+  </a>
 
-    <ThemeIcon />
+  <ThemeIcon />
 
-    <nav class="navigation">
-        <ol>
-            <li>
-                <a title="go back home" href="/">home</a>
-            </li><li>
-                <a title="read my blog" href="/blog">blog</a>
-            </li><li>
-                <a title="calendar of life" href="/cal-of-life"
-                    >calendar of life</a
-                >
-            </li><li>
-                <a title="our hours" href="/our-hours">our hours</a>
-            </li>
-        </ol>
-    </nav>
+  <nav class="navigation">
+    <ol>
+      <li>
+        <a title="go back home" href="/">home</a>
+      </li><li>
+        <a title="read my blog" href="/blog">blog</a>
+      </li><li>
+        <a title="recommends" href="/recommends">recommends</a>
+      </li><li>
+        <a title="experiments" href="/experiments">experiments</a>
+      </li>
+    </ol>
+  </nav>
 </header>

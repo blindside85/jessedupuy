@@ -2,8 +2,8 @@
 const msg = Astro.props.msg;
 ---
 
-<script define:vars={{ msg }}>
-    console.info(`${msg}
+<script is:inline define:vars={{ msg }}>
+  console.info(`${msg}
 
                  @@@@@@@@@@@@@@@@@
             @@@@@@@ @@ @@   @   @@@@@

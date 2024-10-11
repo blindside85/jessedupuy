@@ -1,25 +1,26 @@
 html,
 body {
-    box-sizing: border-box;
-    height: 100%;
-    padding: 0;
-    margin: 0;
+  box-sizing: border-box;
+  height: 100%;
+  padding: 0;
+  margin: 0;
 }
 
 html {
-    font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "DejaVu Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif;
-    background-image: url(../images/natural-white.webp);
-    background-color: #ebe8e7;
-    background-position: 0px 0px;
-    color: #283739;
+  font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida,
+    "DejaVu Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif;
+  background-image: url(../images/natural-white.webp);
+  background-color: var(--color-light-gray);
+  background-position: 0px 0px;
+  color: var(--color-dark-gray);
 }
 
 body {
-    display: flex;
-    justify-content: center;
-    padding: 0 1rem;
-    font-size: 1rem;
-    line-height: 1.5;
+  display: flex;
+  justify-content: center;
+  padding: 0 1rem;
+  font-size: 1rem;
+  line-height: 1.5;
 }
 
 h1,
@@ -28,147 +29,145 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #2c5d63;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--color-light-accent);
 }
 
 h1 {
-    font-size: 1.8em;
+  font-size: 1.8em;
 }
 
 h2 {
-    margin-top: 2.2em;
-    margin-bottom: 1em;
+  margin-top: 2.2em;
+  margin-bottom: 1em;
 }
 
 h3 {
-    margin-top: 1.5em;
-    margin-bottom: 0.7em;
+  margin-top: 1.5em;
+  margin-bottom: 0.7em;
 }
 
 li {
-    margin-bottom: 0.5em;
+  margin-bottom: 0.5em;
 }
 
 li:last-of-type {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 a {
-    color: gray;
-    text-decoration: none;
+  color: var(--color-gray);
 }
 
 a:hover,
 a:visited:hover {
-    color: #091015;
+  color: var(--color-near-black);
 }
 
 a:active,
 a:visited:active {
-    color: #2c5d63;
+  color: var(--color-light-accent);
 }
 
 a:visited {
-    color: #2c5d63;
+  color: var(--color-light-accent);
 }
 
 main a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .wrapper {
-    display: grid;
-    min-height: 100vh;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr auto;
-    grid-template-areas:
-        'header'
-        'content'
-        'footer';
+  display: grid;
+  min-height: 100vh;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    "header"
+    "content"
+    "footer";
 }
 
 .wrapper header {
-    grid-area: header;
+  grid-area: header;
 }
 
 .wrapper main {
-    position: relative;
-    grid-area: content;
-    flex: 35vw 0 auto;
+  position: relative;
+  grid-area: content;
+  flex: 35vw 0 auto;
 }
 
 .wrapper footer {
-    grid-area: footer;
-    font-size: 0.8em;
+  grid-area: footer;
+  font-size: 0.8em;
 }
 
 /* BLOG PAGE */
 .tags ul {
-    padding: 0;
+  padding: 0;
 }
 
 .tags li {
-    list-style: none;
+  list-style: none;
 }
 
 /* DARK MODE STYLING */
-html.dark {
-    color: #ebe8e7;
-    background-image: url(../images/natural-black.webp);
-    background-color: #091015;
-}
+html[data-theme="dark"] {
+  color: var(--color-light-gray);
+  background-image: url(../images/natural-black.webp);
+  background-color: var(--color-near-black);
 
-html.dark a {
-    color: gray;
-    text-decoration: none;
-}
+  a {
+    color: var(--color-gray);
+  }
 
-html.dark a:hover,
-html.dark a:visited:hover {
-    color: silver;
-}
+  a:hover,
+  a:visited:hover {
+    color: var(--color-light-gray);
+  }
 
-html.dark a:active,
-html.dark a:visited:active {
-    color: #ebe8e7;
-}
+  a:active,
+  a:visited:active {
+    color: var(--color-light-gray);
+  }
 
-html.dark a:visited {
-    color: #a2c11c;
-}
+  a:visited {
+    color: var(--color-dark-accent);
+  }
 
-html.dark h1,
-html.dark h2,
-html.dark h3,
-html.dark h4,
-html.dark h5,
-html.dark h6 {
-    color: #a2c11c;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: var(--color-dark-accent);
+  }
 }
 
 @media (min-width: 35em) {
-    .wrapper main {
-        max-width: 70vw;
-    }
+  .wrapper main {
+    max-width: 70vw;
+  }
 }
 
 @media (min-width: 48em) {
-    :root {
-        font-size: calc(1rem + ((1vw - 0.48rem) * 1.4));
-    }
+  :root {
+    font-size: calc(1rem + ((1vw - 0.48rem) * 1.4));
+  }
 
-    .wrapper main {
-        max-width: 60vw;
-    }
+  .wrapper main {
+    max-width: 60vw;
+  }
 }
 
 @media (min-width: 70em) {
-    :root {
-        font-size: 1.2em;
-    }
+  :root {
+    font-size: 1.2em;
+  }
 
-    .wrapper main {
-        max-width: 35rem;
-    }
+  .wrapper main {
+    max-width: 35rem;
+  }
 }

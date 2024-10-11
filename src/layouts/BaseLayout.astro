@@ -4,34 +4,35 @@ import Icons from "@components/Icons.astro";
 import BodyTop from "@components/BodyTop.astro";
 import BaseHeader from "@components/BaseHeader.astro";
 import Footer from "@components/Footer.astro";
+import "@styles/vars.css";
 import "@styles/core.css";
 let title;
 if (Astro.url.host.includes("localhost")) {
-    title = `DEV: ${Astro.props.title}`;
+  title = `DEV: ${Astro.props.title}`;
 } else {
-    title = Astro.props.title;
+  title = Astro.props.title;
 }
 const desc =
-    "Welcome to my personal site where I share insights on cloud engineering, web development, music, fitness, and more. Join me as I explore the intersection of technology and creativity.";
+  "Welcome to my personal site where I share insights on cloud engineering, web development, music, fitness, and more. Join me as I explore the intersection of technology and creativity.";
 const msg = "Thanks for visiting!";
 ---
 
 <!doctype html>
 <html lang="en">
-    <head>
-        <HtmlHead {title} {desc} />
-    </head>
-    <body>
-        <Icons />
-        <BodyTop {msg} />
-        <div class="wrapper">
-            <BaseHeader title={title} />
-            <main>
-                <h1>{title}</h1>
+  <head>
+    <HtmlHead {title} {desc} />
+  </head>
+  <body>
+    <Icons />
+    <BodyTop {msg} />
+    <div class="wrapper">
+      <BaseHeader title={title} />
+      <main>
+        <h1>{title}</h1>
 
-                <slot />
-            </main>
-            <Footer />
-        </div>
-    </body>
+        <slot />
+      </main>
+      <Footer />
+    </div>
+  </body>
 </html>
