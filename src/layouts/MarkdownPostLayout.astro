@@ -5,66 +5,64 @@ import BodyTop from "@components/BodyTop.astro";
 import BaseHeader from "@components/BaseHeader.astro";
 import TagLink from "@components/TagLink.astro";
 import Footer from "@components/Footer.astro";
+import "@styles/vars.css";
 import "@styles/core.css";
 import "@styles/post.css";
 
 const { frontmatter } = Astro.props;
 let title;
 if (Astro.url.host.includes("localhost")) {
-    title = `DEV: blog: ${frontmatter.title}`;
+  title = `DEV: blog: ${frontmatter.title}`;
 } else {
-    title = `blog: ${frontmatter.title}`;
+  title = `blog: ${frontmatter.title}`;
 }
 const msg = "Reading is one of my favorite things to do. How about you?";
 ---
 
 <!doctype html>
 <html lang="en">
-    <head>
-        <HtmlHead {title} desc={frontmatter.description} />
-    </head>
+  <head>
+    <HtmlHead {title} desc={frontmatter.description} />
+  </head>
 
-    <body>
-        <Icons />
-        <BodyTop {msg} />
-        <div class="wrapper">
-            <BaseHeader title={frontmatter.title} />
-            <main>
-                <article>
-                    <section class="post-hero">
-                        <section class="post-info">
-                            <h1>{frontmatter.title}</h1>
-                            <time datetime={frontmatter.pubDate.toISOString()}>
-                                {frontmatter.pubDate.toDateString()}
-                            </time>
-                            <section class="post-tags">
-                                <ul>
-                                    {
-                                        frontmatter.tags.map((tag: string) => (
-                                            <li class="tag">
-                                                <TagLink {tag} />
-                                            </li>
-                                        ))
-                                    }
-                                </ul>
-                            </section>
-                        </section>
-                        {
-                            frontmatter.image && (
-                                <img
-                                    src={frontmatter.image.url}
-                                    alt={frontmatter.image.alt}
-                                />
-                            )
-                        }
-                    </section>
+  <body>
+    <Icons />
+    <BodyTop {msg} />
+    <div class="wrapper">
+      <BaseHeader title={frontmatter.title} />
+      <main>
+        <article>
+          <section class="post-hero">
+            <section class="post-info">
+              <h1>{frontmatter.title}</h1>
+              <time datetime={frontmatter.pubDate.toISOString()}>
+                {frontmatter.pubDate.toDateString()}
+              </time>
+              <section class="post-tags">
+                <ul>
+                  {
+                    frontmatter.tags.map((tag: string) => (
+                      <li class="tag">
+                        <TagLink {tag} />
+                      </li>
+                    ))
+                  }
+                </ul>
+              </section>
+            </section>
+            {
+              frontmatter.image && (
+                <img src={frontmatter.image.url} alt={frontmatter.image.alt} />
+              )
+            }
+          </section>
 
-                    <section class="post-content">
-                        <slot />
-                    </section>
-                </article>
-            </main>
-            <Footer />
-        </div>
-    </body>
+          <section class="post-content">
+            <slot />
+          </section>
+        </article>
+      </main>
+      <Footer />
+    </div>
+  </body>
 </html>

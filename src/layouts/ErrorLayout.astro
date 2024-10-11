@@ -4,13 +4,14 @@ import Icons from "@components/Icons.astro";
 import BodyTop from "@components/BodyTop.astro";
 import BaseHeader from "@components/BaseHeader.astro";
 import Footer from "@components/Footer.astro";
+import "@styles/vars.css";
 import "@styles/core.css";
 
 let title;
 if (Astro.url.host.includes("localhost")) {
-    title = `DEV: ${Astro.props.title}`;
+  title = `DEV: ${Astro.props.title}`;
 } else {
-    title = Astro.props.title;
+  title = Astro.props.title;
 }
 const desc = "Error encountered, please return to the homepage";
 const msg = "Whoops, maybe go back and try again...";
@@ -18,20 +19,20 @@ const msg = "Whoops, maybe go back and try again...";
 
 <!doctype html>
 <html lang="en">
-    <head>
-        <HtmlHead {title} {desc} />
-    </head>
-    <body>
-        <BodyTop {msg} />
-        <Icons />
-        <div class="wrapper">
-            <BaseHeader {title} />
-            <main>
-                <h1>{title}</h1>
+  <head>
+    <HtmlHead {title} {desc} />
+  </head>
+  <body>
+    <BodyTop {msg} />
+    <Icons />
+    <div class="wrapper">
+      <BaseHeader {title} />
+      <main>
+        <h1>{title}</h1>
 
-                <slot />
-            </main>
-            <Footer />
-        </div>
-    </body>
+        <slot />
+      </main>
+      <Footer />
+    </div>
+  </body>
 </html>
