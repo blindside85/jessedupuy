@@ -1,8 +1,8 @@
 {
     "dependencies": {
-        "@astrojs/preact": "^3.5.3",
-        "@astrojs/rss": "^4.0.8",
-        "astro": "^4.16.0",
+        "@astrojs/preact": "^4.0.11",
+        "@astrojs/rss": "^4.0.11",
+        "astro": "^5.7.11",
         "sharp-ico": "^0.1.5"
     },
     "scripts": {
