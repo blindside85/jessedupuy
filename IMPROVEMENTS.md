@@ -38,7 +38,7 @@ This document tracks recommended improvements for jessedupuy.me based on analysi
   - **Fix**: Created config.ts for DRY principle, standardized all titles to "Title | SITE.name" format
   - **Completed**: Commit [hash]
 
-- [ ] **Add Sitemap Generation**
+- [x] **Add Sitemap Generation**
   - **Install**: `npm install @astrojs/sitemap`
   - **File**: `astro.config.mjs`
   - **Add**:
@@ -49,6 +49,7 @@ This document tracks recommended improvements for jessedupuy.me based on analysi
       integrations: [sitemap()],
     });
     ```
+  - **Completed**: Generates sitemap-index.xml with all 11 pages
 
 - [ ] **Update robots.txt**
   - **File**: `public/robots.txt`
