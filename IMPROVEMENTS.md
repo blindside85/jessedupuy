@@ -58,10 +58,11 @@ This document tracks recommended improvements for jessedupuy.me based on analysi
 
 ### Dependency Cleanup
 
-- [ ] **Remove Unused @astrojs/preact**
+- [x] **Remove Unused @astrojs/preact**
   - **Command**: `npm uninstall @astrojs/preact`
   - **File**: `package.json:3`
   - **Reason**: Installed but not used anywhere
+  - **Completed**: Removed 65 unused packages, build verified
 
 ---
 
