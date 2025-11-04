@@ -17,12 +17,13 @@ This document tracks recommended improvements for jessedupuy.me based on analysi
 
 ### Security
 
-- [ ] **Add Security Attributes to External Links**
+- [x] **Add Security Attributes to External Links**
   - **Files**:
     - `src/components/Footer.astro:35,48,61`
     - `src/components/Recommendation.astro:59`
   - **Fix**: Add `rel="noopener noreferrer"` to all `target="_blank"` links
   - **Example**: `<a href="..." target="_blank" rel="noopener noreferrer">`
+  - **Completed**: Commit [hash]
 
 ### SEO Quick Fixes
 
