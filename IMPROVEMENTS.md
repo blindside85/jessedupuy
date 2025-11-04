@@ -8,11 +8,12 @@ This document tracks recommended improvements for jessedupuy.me based on analysi
 
 ### Critical Fixes
 
-- [ ] **Fix CSS Variable Bug** 🐛
+- [x] **Fix CSS Variable Bug** 🐛
   - **File**: `src/styles/vars.css:13`
   - **Issue**: Invalid CSS variable reference
   - **Current**: `--color-light-accent: --color-dark-gray;`
   - **Fix**: `--color-light-accent: var(--color-dark-gray);`
+  - **Completed**: Commit 9b84585
 
 ### Security
 
