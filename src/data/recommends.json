@@ -1,1 +1,99 @@
-[]
+[
+  {
+    "name": "development",
+    "items": [
+      {
+        "icon": "/icons/zed.png",
+        "name": "zed",
+        "type": "code editor",
+        "link": "https://zed.dev/",
+        "description": "Rust-based code editor with useful AI features and human collaboration as core values. Also it's <em>really really fast</em>."
+      },
+      {
+        "icon": "/icons/neovim.svg",
+        "name": "neovim",
+        "type": "text editor",
+        "link": "https://neovim.io/",
+        "description": "Hyperextensible Vim-based text editor with a rich plugin ecosystem. Modern, fast, and highly customizable for developers who value efficiency."
+      },
+      {
+        "icon": "/icons/ripgrep.svg",
+        "name": "ripgrep",
+        "type": "search tool",
+        "link": "https://github.com/BurntSushi/ripgrep",
+        "description": "Recursively searches directories for a regex pattern. Significantly faster than alternatives like grep, ag, or ack."
+      }
+    ]
+  },
+  {
+    "name": "terminal",
+    "items": [
+      {
+        "icon": "/icons/ghostty.png",
+        "name": "ghostty",
+        "type": "terminal emulator",
+        "link": "https://ghostty.org/",
+        "description": "A fast, feature-rich, GPU-accelerated terminal emulator focused on performance and efficiency. Built from the ground up to feel responsive."
+      },
+      {
+        "icon": "/icons/fzf.svg",
+        "name": "fzf",
+        "type": "fuzzy finder",
+        "link": "https://github.com/junegunn/fzf",
+        "description": "A command-line fuzzy finder that speeds up your workflow. Search files, command history, processes, and more with blazing speed."
+      },
+      {
+        "icon": "/icons/zoxide.svg",
+        "name": "zoxide",
+        "type": "directory jumper",
+        "link": "https://github.com/ajeetdsouza/zoxide",
+        "description": "A smarter cd command that remembers the directories you use most frequently. Jump anywhere in your filesystem with minimal keystrokes."
+      },
+      {
+        "icon": "/icons/obsidian.svg",
+        "name": "obsidian",
+        "type": "note-taking app",
+        "link": "https://obsidian.md/",
+        "description": "A powerful knowledge base that works on top of a local folder of plain text Markdown files. Connect ideas with linking, visualize connections, and customize with plugins."
+      }
+    ]
+  },
+  {
+    "name": "productivity",
+    "items": [
+      {
+        "icon": "/icons/claude.svg",
+        "name": "claude",
+        "type": "AI assistant",
+        "link": "https://claude.ai/",
+        "description": "Anthropic's AI assistant focused on helpfulness, harmlessness, and honesty. Known for long context windows and thoughtful responses."
+      },
+      {
+        "icon": "/icons/spotify.svg",
+        "name": "spotify",
+        "type": "music streaming",
+        "link": "https://www.spotify.com/",
+        "description": "Digital music service with millions of songs, podcasts, and videos. Perfect background companion for coding sessions and deep work."
+      }
+    ]
+  },
+  {
+    "name": "system",
+    "items": [
+      {
+        "icon": "/icons/macos.svg",
+        "name": "macos",
+        "type": "operating system",
+        "link": "https://www.apple.com/macos/",
+        "description": "Apple's desktop operating system that combines powerful technology with elegant design. Optimized for productivity with great developer tools."
+      },
+      {
+        "icon": "/icons/raycast.svg",
+        "name": "raycast",
+        "type": "launcher & productivity",
+        "link": "https://www.raycast.com/",
+        "description": "Blazingly fast, extensible launcher for macOS. Quickly access apps, search the web, control your Mac, and build custom extensions to supercharge your workflow."
+      }
+    ]
+  }
+]
