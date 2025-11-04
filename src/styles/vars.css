@@ -10,5 +10,5 @@
   --color-white-50: rgba(255, 255, 255, 0.5);
   --color-black-50: rgba(0, 0, 0, 0.5);
   --color-dark-accent: #ffc46b;
-  --color-light-accent: --color-dark-gray;
+  --color-light-accent: var(--color-dark-gray);
 }
