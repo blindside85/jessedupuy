@@ -27,10 +27,16 @@ This document tracks recommended improvements for jessedupuy.me based on analysi
 
 ### SEO Quick Fixes
 
-- [ ] **Fix Blog Post Title SEO Issue**
-  - **File**: `src/layouts/MarkdownPostLayout.astro:17`
-  - **Issue**: "blog:" prefix in `<title>` tag hurts SEO
-  - **Fix**: Keep prefix only in `<h1>`, remove from page title
+- [x] **Fix Blog Post Title SEO Issue**
+  - **Files**:
+    - `src/config.ts` (new file - centralized site constants)
+    - `src/layouts/MarkdownPostLayout.astro:17`
+    - `src/layouts/BaseLayout.astro:10-14`
+    - `src/layouts/ErrorLayout.astro:10-14`
+    - `tsconfig.json` (added @/* path alias)
+  - **Issue**: "blog:" prefix in `<title>` tag hurts SEO, missing site name suffix
+  - **Fix**: Created config.ts for DRY principle, standardized all titles to "Title | SITE.name" format
+  - **Completed**: Commit [hash]
 
 - [ ] **Add Sitemap Generation**
   - **Install**: `npm install @astrojs/sitemap`
