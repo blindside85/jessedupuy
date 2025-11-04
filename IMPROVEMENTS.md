@@ -51,9 +51,10 @@ This document tracks recommended improvements for jessedupuy.me based on analysi
     ```
   - **Completed**: Generates sitemap-index.xml with all 11 pages
 
-- [ ] **Update robots.txt**
+- [x] **Update robots.txt**
   - **File**: `public/robots.txt`
   - **Add**: `Sitemap: https://jessedupuy.me/sitemap-index.xml`
+  - **Completed**: Added sitemap reference for search engines
 
 ### Dependency Cleanup
 
