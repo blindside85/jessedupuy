@@ -13,9 +13,6 @@ const { item } = Astro.props;
     margin-right: 1.5rem;
     flex-grow: 1;
   }
-  img.hidden {
-    display: none;
-  }
   hgroup {
     margin-bottom: 0.5rem;
     flex-grow: 2;
@@ -54,11 +51,9 @@ const { item } = Astro.props;
 </style>
 
 <figure>
-  <img
-    src={item.icon}
-    alt={`${item.name} icon`}
-    onerror="this.classList.add('hidden')"
-  />
+  {item.icon && (
+    <img src={item.icon} alt={`${item.name} icon`} />
+  )}
   <hgroup>
     <h3>
       <a href={item.link} target="_blank">{item.name}</a>

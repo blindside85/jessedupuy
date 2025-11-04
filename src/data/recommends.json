@@ -17,7 +17,6 @@
         "description": "Hyperextensible Vim-based text editor with a rich plugin ecosystem. Modern, fast, and highly customizable for developers who value efficiency."
       },
       {
-        "icon": "/icons/ripgrep.svg",
         "name": "ripgrep",
         "type": "search tool",
         "link": "https://github.com/BurntSushi/ripgrep",
@@ -36,14 +35,12 @@
         "description": "A fast, feature-rich, GPU-accelerated terminal emulator focused on performance and efficiency. Built from the ground up to feel responsive."
       },
       {
-        "icon": "/icons/fzf.svg",
         "name": "fzf",
         "type": "fuzzy finder",
         "link": "https://github.com/junegunn/fzf",
         "description": "A command-line fuzzy finder that speeds up your workflow. Search files, command history, processes, and more with blazing speed."
       },
       {
-        "icon": "/icons/zoxide.svg",
         "name": "zoxide",
         "type": "directory jumper",
         "link": "https://github.com/ajeetdsouza/zoxide",
