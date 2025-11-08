@@ -2,6 +2,7 @@
 import { getImage } from "astro:assets";
 import faviconSrc from "@images/favicon-512.png";
 import faviconSvgSrc from "@images/favicon.svg";
+import { SITE } from "@/config";
 
 const appleTouchIcon = await getImage({
   src: faviconSrc,
@@ -10,7 +11,14 @@ const appleTouchIcon = await getImage({
   format: "png",
 });
 const faviconSvg = await getImage({ src: faviconSvgSrc, format: "svg" });
+
 const { title, desc } = Astro.props;
+
+// Construct full canonical URL
+const canonicalURL = new URL(Astro.url.pathname, SITE.url).href;
+
+// Open Graph image - served directly from public/ (already optimized at 1200x630px)
+const ogImage = `${SITE.url}/og-image.png`;
 ---
 
 <meta charset="utf-8" />
@@ -18,6 +26,18 @@ const { title, desc } = Astro.props;
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="generator" content={Astro.generator} />
 <meta name="description" content={desc} />
+<meta name="author" content={SITE.author} />
+
+<!-- Canonical URL -->
+<link rel="canonical" href={canonicalURL} />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={desc} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:site_name" content={SITE.name} />
 
 <link rel="icon" href="/favicon.ico" sizes="32x32" />
 <link rel="icon" href={faviconSvg.src} type="image/svg+xml" />
