@@ -5,4 +5,8 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
     site: 'https://jessedupuy.me',
     integrations: [sitemap()],
+    build: {
+        inlineStylesheets: 'auto',
+    },
+    compressHTML: true,
 });

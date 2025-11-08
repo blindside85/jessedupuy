@@ -52,7 +52,14 @@ const { item } = Astro.props;
 
 <figure>
   {item.icon && (
-    <img src={item.icon} alt={`${item.name} icon`} />
+    <img
+      src={item.icon}
+      alt={`${item.name} icon`}
+      loading="lazy"
+      decoding="async"
+      width="60"
+      height="60"
+    />
   )}
   <hgroup>
     <h3>

@@ -79,7 +79,12 @@ const blogPostingSchema = {
             </section>
             {
               frontmatter.image && (
-                <img src={frontmatter.image.url} alt={frontmatter.image.alt} />
+                <img
+                  src={frontmatter.image.url}
+                  alt={frontmatter.image.alt}
+                  loading="eager"
+                  decoding="async"
+                />
               )
             }
           </section>
