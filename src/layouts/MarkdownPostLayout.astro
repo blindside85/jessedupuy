@@ -18,12 +18,37 @@ if (Astro.url.host.includes("localhost")) {
   title = `${frontmatter.title} | ${SITE.name}`;
 }
 const msg = "Reading is one of my favorite things to do. How about you?";
+
+// BlogPosting schema for SEO
+const blogPostingSchema = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": frontmatter.title,
+  "description": frontmatter.description,
+  "author": {
+    "@type": "Person",
+    "name": frontmatter.author,
+    "url": SITE.url
+  },
+  "datePublished": frontmatter.pubDate.toISOString(),
+  "publisher": {
+    "@type": "Person",
+    "name": SITE.name,
+    "url": SITE.url
+  },
+  "url": new URL(Astro.url.pathname, SITE.url).href,
+  "keywords": frontmatter.tags.join(", "),
+  ...(frontmatter.image?.url && {
+    "image": new URL(frontmatter.image.url, SITE.url).href
+  })
+};
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <HtmlHead {title} desc={frontmatter.description} />
+    <script type="application/ld+json" set:html={JSON.stringify(blogPostingSchema)} />
   </head>
 
   <body>

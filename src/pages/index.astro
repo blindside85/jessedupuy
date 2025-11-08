@@ -1,9 +1,27 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
+import { SITE } from "@/config";
+
 const title = "a bit about me";
+
+// Person schema for SEO
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": SITE.name,
+  "url": SITE.url,
+  "description": SITE.description,
+  "jobTitle": "Cloud Engineer and Web Developer",
+  "sameAs": [
+    "https://github.com/blindside85/",
+    "https://www.linkedin.com/in/jessedupuy/",
+    "https://codepen.io/blindside85"
+  ]
+};
 ---
 
 <BaseLayout title={title}>
+  <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
   <p>
     Hey. I'm Jesse- nice to meet you! I'm a cloud engineer and web developer
     with a love for all things tech. My journey started with a passion for
