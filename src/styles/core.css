@@ -112,6 +112,30 @@ main a:hover {
   list-style: none;
 }
 
+/* ACCESSIBILITY */
+/* Skip link - hidden by default, visible on focus for keyboard users */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--color-dark-accent);
+  color: var(--color-light-gray);
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  border-radius: 0 0 0.25rem 0;
+  z-index: 100;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* Custom focus styles for better keyboard navigation */
+:focus-visible {
+  outline: 2px solid var(--color-dark-accent);
+  outline-offset: 2px;
+}
+
 /* DARK MODE STYLING */
 html[data-theme="dark"] {
   color: var(--color-light-gray);

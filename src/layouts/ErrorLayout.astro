@@ -24,11 +24,12 @@ const msg = "Whoops, maybe go back and try again...";
     <HtmlHead {title} {desc} />
   </head>
   <body>
+    <a href="#main" class="skip-link">Skip to main content</a>
     <BodyTop {msg} />
     <Icons />
     <div class="wrapper">
       <BaseHeader title={Astro.props.title} />
-      <main>
+      <main id="main">
         <h1>{Astro.props.title}</h1>
 
         <slot />

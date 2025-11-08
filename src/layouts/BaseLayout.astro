@@ -23,11 +23,12 @@ const msg = "Thanks for visiting!";
     <HtmlHead {title} {desc} />
   </head>
   <body>
+    <a href="#main" class="skip-link">Skip to main content</a>
     <Icons />
     <BodyTop {msg} />
     <div class="wrapper">
       <BaseHeader title={Astro.props.title} />
-      <main>
+      <main id="main">
         <h1>{Astro.props.title}</h1>
 
         <slot />

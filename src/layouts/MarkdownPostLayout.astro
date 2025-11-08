@@ -52,11 +52,12 @@ const blogPostingSchema = {
   </head>
 
   <body>
+    <a href="#main" class="skip-link">Skip to main content</a>
     <Icons />
     <BodyTop {msg} />
     <div class="wrapper">
       <BaseHeader title={frontmatter.title} />
-      <main>
+      <main id="main">
         <article>
           <section class="post-hero">
             <section class="post-info">

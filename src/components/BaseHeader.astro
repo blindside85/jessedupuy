@@ -2,6 +2,9 @@
 import ThemeIcon from "./ThemeIcon.astro";
 import { SITE } from "@/config";
 
+// Get current path for aria-current
+const currentPath = Astro.url.pathname;
+
 // BreadcrumbList schema for SEO
 const breadcrumbSchema = {
   "@context": "https://schema.org",
@@ -109,13 +112,13 @@ const breadcrumbSchema = {
   <nav class="navigation">
     <ol>
       <li>
-        <a title="go back home" href="/">home</a>
+        <a title="go back home" href="/" aria-current={currentPath === "/" ? "page" : undefined}>home</a>
       </li><li>
-        <a title="read my blog" href="/blog">blog</a>
+        <a title="read my blog" href="/blog" aria-current={currentPath.startsWith("/blog") ? "page" : undefined}>blog</a>
       </li><li>
-        <a title="recommends" href="/recommends">recommends</a>
+        <a title="recommends" href="/recommends" aria-current={currentPath.startsWith("/recommends") ? "page" : undefined}>recommends</a>
       </li><li>
-        <a title="experiments" href="/experiments">experiments</a>
+        <a title="experiments" href="/experiments" aria-current={currentPath.startsWith("/experiments") ? "page" : undefined}>experiments</a>
       </li>
     </ol>
   </nav>
