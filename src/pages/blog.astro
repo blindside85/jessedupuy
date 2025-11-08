@@ -3,7 +3,10 @@ import { getCollection } from "astro:content";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import "@components/Icons.astro";
 import TagLink from "@components/TagLink.astro";
-const blogEntries = await getCollection("posts");
+const blogEntries = await getCollection("posts", ({ data }) => {
+    // Show drafts only in development mode
+    return import.meta.env.DEV || !data.draft;
+});
 const title = "posts";
 const tags = [...new Set(blogEntries.map((post) => post.data.tags).flat())];
 ---

@@ -11,4 +11,30 @@
   --color-black-50: rgba(0, 0, 0, 0.5);
   --color-dark-accent: #ffc46b;
   --color-light-accent: var(--color-dark-gray);
+
+  /* Callout colors - Light mode */
+  --callout-tip-border: #3498db;
+  --callout-tip-bg: rgba(52, 152, 219, 0.08);
+  --callout-tip-text: #2980b9;
+
+  --callout-warning-border: #e67e22;
+  --callout-warning-bg: rgba(230, 126, 34, 0.08);
+  --callout-warning-text: #d35400;
+
+  --callout-note-border: #9b59b6;
+  --callout-note-bg: rgba(155, 89, 182, 0.08);
+  --callout-note-text: #8e44ad;
+
+  /* Callout colors - Dark mode (will be overridden) */
+  --callout-tip-border-dark: #5dade2;
+  --callout-tip-bg-dark: rgba(93, 173, 226, 0.1);
+  --callout-tip-text-dark: #5dade2;
+
+  --callout-warning-border-dark: #f39c12;
+  --callout-warning-bg-dark: rgba(243, 156, 18, 0.1);
+  --callout-warning-text-dark: #f39c12;
+
+  --callout-note-border-dark: #bb8fce;
+  --callout-note-bg-dark: rgba(187, 143, 206, 0.1);
+  --callout-note-text-dark: #bb8fce;
 }
