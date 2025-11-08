@@ -2,8 +2,8 @@
 import { getImage } from "astro:assets";
 import faviconSrc from "@images/favicon-512.png";
 import faviconSvgSrc from "@images/favicon.svg";
-import bgLightSrc from "@images/natural-white.webp";
-import bgDarkSrc from "@images/natural-black.webp";
+import bgLightSrc from "@images/natural-white.webp?url";
+import bgDarkSrc from "@images/natural-black.webp?url";
 import { SITE } from "@/config";
 
 const appleTouchIcon = await getImage({
@@ -13,10 +13,6 @@ const appleTouchIcon = await getImage({
   format: "png",
 });
 const faviconSvg = await getImage({ src: faviconSvgSrc, format: "svg" });
-
-// Process background images for preloading
-const bgLight = await getImage({ src: bgLightSrc, format: "webp" });
-const bgDark = await getImage({ src: bgDarkSrc, format: "webp" });
 
 const { title, desc } = Astro.props;
 
@@ -37,9 +33,9 @@ const ogImage = `${SITE.url}/og-image.png`;
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
 
-<!-- Preload critical background images -->
-<link rel="preload" href={bgLight.src} as="image" type="image/webp" media="(prefers-color-scheme: light)" />
-<link rel="preload" href={bgDark.src} as="image" type="image/webp" media="(prefers-color-scheme: dark)" />
+<!-- Preload critical background images (both themes, ~12KB total) -->
+<link rel="preload" href={bgLightSrc} as="image" type="image/webp" />
+<link rel="preload" href={bgDarkSrc} as="image" type="image/webp" />
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website" />

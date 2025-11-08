@@ -115,8 +115,8 @@ main a:hover {
 /* ACCESSIBILITY */
 /* Skip link - hidden by default, visible on focus for keyboard users */
 .skip-link {
-  position: absolute;
-  top: -40px;
+  position: fixed;
+  top: -100%;
   left: 0;
   background: var(--color-dark-accent);
   color: var(--color-light-gray);
@@ -124,6 +124,7 @@ main a:hover {
   text-decoration: none;
   border-radius: 0 0 0.25rem 0;
   z-index: 100;
+  transition: top 0.2s ease;
 }
 
 .skip-link:focus {
