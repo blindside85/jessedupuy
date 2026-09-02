@@ -7,7 +7,7 @@ export async function GET(context) {
         return !data.draft;
     });
     return rss({
-        title: 'jessedupuy: blog',
+        title: 'jessedupuy: writing',
         description: 'My little chunk of the internet',
         site: context.site,
         items: posts.map((post) => ({

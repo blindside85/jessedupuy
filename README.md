@@ -140,10 +140,35 @@ Your content here...
 ```
 
 Posts automatically appear in:
-- Blog listing (`/blog`)
+- Writing listing (`/writing`)
 - Tag archives (`/tags/[tag]`)
 - RSS feed (`/rss.xml`)
 - Sitemap
+
+### Posts with images
+
+For a post that includes screenshots or other local images, use a folder instead of a single file, with the post itself named `index.md` and images alongside it:
+
+```
+src/content/posts/
+  my-post/
+    index.md
+    screenshot.png
+```
+
+Reference the image with a relative path in the markdown body — Astro automatically optimizes it (resizing, format conversion, `width`/`height`, lazy loading):
+
+```markdown
+![A description of the screenshot](./screenshot.png)
+```
+
+The folder name becomes the post's URL slug (`my-post/index.md` → `/posts/my-post/`), same as a flat `my-post.md` would.
+
+### Writing in Obsidian
+
+Blog posts live in `src/content/posts/`, which is symlinked into a dedicated Obsidian vault at `~/Documents/jessedupuy-blog` (the `posts` folder inside that vault is the symlink). The vault has `useMarkdownLinks` enabled so pasted images use standard `![](./image.png)` syntax instead of Obsidian's `![[wikilink]]` embeds, and new attachments save into the same folder as the note they're pasted into — matching the co-located image convention above.
+
+To publish: open the vault, write the post inside `posts/` (as a folder if it has images, per above), set `draft: false` when ready, then commit and push via the [Obsidian Git](https://github.com/denolehov/obsidian-git) plugin's "Commit and push" command. Pushing to `main` auto-deploys.
 
 ## 🎯 Recent Updates
 

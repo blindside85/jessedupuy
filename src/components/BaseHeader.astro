@@ -19,8 +19,8 @@ const breadcrumbSchema = {
     {
       "@type": "ListItem",
       "position": 2,
-      "name": "Blog",
-      "item": `${SITE.url}/blog`
+      "name": "Writing",
+      "item": `${SITE.url}/writing`
     },
     {
       "@type": "ListItem",
@@ -114,7 +114,7 @@ const breadcrumbSchema = {
       <li>
         <a title="go back home" href="/" aria-current={currentPath === "/" ? "page" : undefined}>home</a>
       </li><li>
-        <a title="read my blog" href="/blog" aria-current={currentPath.startsWith("/blog") ? "page" : undefined}>blog</a>
+        <a title="read my writing" href="/writing" aria-current={currentPath.startsWith("/writing") ? "page" : undefined}>writing</a>
       </li><li>
         <a title="recommends" href="/recommends" aria-current={currentPath.startsWith("/recommends") ? "page" : undefined}>recommends</a>
       </li><li>
