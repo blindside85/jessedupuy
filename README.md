@@ -177,7 +177,7 @@ This is a personal project, but if you notice any bugs or have suggestions, feel
 
 ## 📄 License
 
-Copyright © 2025 Jesse Dupuy. All rights reserved.
+Copyright © 2026 Jesse Dupuy. All rights reserved.
 
 ---
 

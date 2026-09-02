@@ -1,8 +1,8 @@
 {
     "dependencies": {
-        "@astrojs/rss": "^4.0.11",
-        "@astrojs/sitemap": "^3.6.0",
-        "astro": "^5.7.13",
+        "@astrojs/rss": "^4.0.19",
+        "@astrojs/sitemap": "^3.7.4",
+        "astro": "^7.2.10",
         "sharp-ico": "^0.1.5"
     },
     "scripts": {
@@ -13,6 +13,6 @@
         "preview": "astro preview"
     },
     "devDependencies": {
-        "@types/node": "^20.14.9"
+        "@types/node": "^24.0.0"
     }
 }

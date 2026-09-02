@@ -19,7 +19,7 @@ const tags = [...new Set(blogEntries.map((post) => post.data.tags).flat())];
         {
             blogEntries.map((blogPostEntry) => (
                 <li>
-                    <a href={`/posts/${blogPostEntry.slug}`}>
+                    <a href={`/posts/${blogPostEntry.id}`}>
                         {blogPostEntry.data.title}
                     </a>
                     <time datetime={blogPostEntry.data.pubDate.toISOString()}>

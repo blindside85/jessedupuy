@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a personal website/blog built with Astro 5. The site includes a blog, recommendation pages, and experimental interactive projects. Site URL: https://jessedupuy.me
+This is a personal website/blog built with Astro 7. The site includes a blog, recommendation pages, and experimental interactive projects. Site URL: https://jessedupuy.me
 
 ## Development Commands
 
@@ -24,7 +24,7 @@ npm run preview
 ## Architecture
 
 ### Content Management
-- **Blog posts**: Content collections in `src/content/posts/` with frontmatter schema defined in `src/content/config.ts`
+- **Blog posts**: Content collections in `src/content/posts/` with frontmatter schema defined in `src/content.config.ts`
   - Schema includes: title, pubDate, description, author, image (optional), tags
   - Posts are rendered via dynamic route at `src/pages/posts/[...slug].astro`
   - RSS feed generated at `src/pages/rss.xml.js`
@@ -81,7 +81,7 @@ Configured in `tsconfig.json`:
 - Console message/Easter egg implemented in `BodyTop.astro`
 
 ## Technology Stack
-- **Framework**: Astro 5.7.13
+- **Framework**: Astro 7.2.10
 - **UI**: Preact components via `@astrojs/preact`
 - **Image optimization**: sharp-ico for favicon generation
 - **TypeScript**: Strict mode with `astro/tsconfigs/strictest`
@@ -90,7 +90,7 @@ Configured in `tsconfig.json`:
 
 ### Adding a New Blog Post
 1. Create `.md` or `.mdx` file in `src/content/posts/`
-2. Include required frontmatter matching schema in `src/content/config.ts`
+2. Include required frontmatter matching schema in `src/content.config.ts`
 3. Posts automatically appear on blog index and RSS feed
 
 ### Adding Recommendations
