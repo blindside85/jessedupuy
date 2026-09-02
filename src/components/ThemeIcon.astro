@@ -1,4 +1,4 @@
-<button id="themeToggle" aria-label="Toggle dark mode">
+<button id="themeToggle" aria-pressed="false" aria-label="Switch to dark mode">
   <svg width="30px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
     <path
       class="sun"
@@ -66,6 +66,15 @@
 
 <script is:inline>
   const toggle = document.getElementById("themeToggle");
+
+  const syncToggleState = (theme) => {
+    toggle.setAttribute("aria-pressed", String(theme === "dark"));
+    toggle.setAttribute(
+      "aria-label",
+      theme === "dark" ? "Switch to light mode" : "Switch to dark mode",
+    );
+  };
+
   const storedTheme =
     localStorage.getItem("theme") ||
     (window.matchMedia("(prefers-color-scheme: dark)").matches
@@ -74,6 +83,7 @@
 
   if (storedTheme) {
     document.documentElement.setAttribute("data-theme", storedTheme);
+    syncToggleState(storedTheme);
   }
 
   toggle.onclick = () => {
@@ -86,5 +96,6 @@
 
     document.documentElement.setAttribute("data-theme", targetTheme);
     localStorage.setItem("theme", targetTheme);
+    syncToggleState(targetTheme);
   };
 </script>
