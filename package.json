@@ -10,7 +10,8 @@
         "dev": "astro dev",
         "start": "astro dev",
         "build": "astro build",
-        "preview": "astro preview"
+        "preview": "astro preview",
+        "voices": "uv run scripts/schu-fu-voices.py"
     },
     "devDependencies": {
         "@types/node": "^24.0.0"

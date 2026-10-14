@@ -64,6 +64,7 @@ npm run preview
   - `core.css` - Base styles and resets
   - `post.css` - Blog post-specific styles
   - `cal.css` - Calendar experiment styles
+  - `schu-fu.css` - Schu-Fu drill caller styles (technique list lives in `src/data/schu-fu.json`)
 - Component styles are scoped within `.astro` files
 
 ### Path Aliases
@@ -102,6 +103,13 @@ Configured in `tsconfig.json`:
 1. Add new page in `src/pages/experiments/`
 2. Create associated script in `src/scripts/` if interactive
 3. Add styles inline or in `src/styles/`
+
+### Schu-Fu Voice Clips
+The Schu-Fu drill caller plays pre-generated clips from `public/audio/schu-fu/`, listed in `src/data/schu-fu-audio.json`; techniques without a clip fall back to the browser's built-in voice.
+1. After editing `src/data/schu-fu.json`, run `npm run voices` (Apple silicon, needs `uv` and `ffmpeg`) and commit the new clips with the manifest
+2. Only new or changed techniques are generated; `npm run voices -- "horse schu"` redoes specific ones
+3. If a name is mispronounced, add a phonetic `say` to it in `src/data/schu-fu.json` and rerun; to keep a particular take, add its `seed` (the "ready"/"oosaaa" cues live in `CUES` in the script)
+4. The voice is set by `VOICE` at the top of `scripts/schu-fu-voices.py`; changing it regenerates every clip
 
 
 <!-- BEGIN BEADS INTEGRATION v:1 profile:minimal hash:1105d646 -->

@@ -1,0 +1,730 @@
+{
+  "anchoring horn": {
+    "file": "/audio/schu-fu/anchoring-horn.mp3",
+    "key": "941c322a83b7"
+  },
+  "anchoring storm": {
+    "file": "/audio/schu-fu/anchoring-storm.mp3",
+    "key": "cf6500cc377e"
+  },
+  "angling pendulum": {
+    "file": "/audio/schu-fu/angling-pendulum.mp3",
+    "key": "df5986ac016e"
+  },
+  "back breaker": {
+    "file": "/audio/schu-fu/back-breaker.mp3",
+    "key": "820b4786d414"
+  },
+  "ballistic horn": {
+    "file": "/audio/schu-fu/ballistic-horn.mp3",
+    "key": "06380f6ab7b7"
+  },
+  "bear and ram": {
+    "file": "/audio/schu-fu/bear-and-ram.mp3",
+    "key": "8b3947483c97"
+  },
+  "behind the blade": {
+    "file": "/audio/schu-fu/behind-the-blade.mp3",
+    "key": "8ca1934a5974"
+  },
+  "beretta": {
+    "file": "/audio/schu-fu/beretta.mp3",
+    "key": "9e78fe429513"
+  },
+  "biting crane": {
+    "file": "/audio/schu-fu/biting-crane.mp3",
+    "key": "012eec46e7d6"
+  },
+  "black collar crime": {
+    "file": "/audio/schu-fu/black-collar-crime.mp3",
+    "key": "3772b38ce57d"
+  },
+  "black dagger": {
+    "file": "/audio/schu-fu/black-dagger.mp3",
+    "key": "f304a98c2ba8"
+  },
+  "blitz": {
+    "file": "/audio/schu-fu/blitz.mp3",
+    "key": "79b7ae8210d4"
+  },
+  "blocking sword": {
+    "file": "/audio/schu-fu/blocking-sword.mp3",
+    "key": "c45b265a4f12"
+  },
+  "braving the storm": {
+    "file": "/audio/schu-fu/braving-the-storm.mp3",
+    "key": "df99f3158564"
+  },
+  "breaking the storm": {
+    "file": "/audio/schu-fu/breaking-the-storm.mp3",
+    "key": "3077addd0481"
+  },
+  "broken serpent": {
+    "file": "/audio/schu-fu/broken-serpent.mp3",
+    "key": "592c2cf0a540"
+  },
+  "broken wedge": {
+    "file": "/audio/schu-fu/broken-wedge.mp3",
+    "key": "fd3c316a52bd"
+  },
+  "bull fighter": {
+    "file": "/audio/schu-fu/bull-fighter.mp3",
+    "key": "e518a2a00178"
+  },
+  "catch the monkey": {
+    "file": "/audio/schu-fu/catch-the-monkey.mp3",
+    "key": "af07259e6107"
+  },
+  "charging bull": {
+    "file": "/audio/schu-fu/charging-bull.mp3",
+    "key": "e88ac997577f"
+  },
+  "checking sword": {
+    "file": "/audio/schu-fu/checking-sword.mp3",
+    "key": "35fea9ef0a8f"
+  },
+  "china hand": {
+    "file": "/audio/schu-fu/china-hand.mp3",
+    "key": "8e66955d2e9d"
+  },
+  "circle of horns": {
+    "file": "/audio/schu-fu/circle-of-horns.mp3",
+    "key": "b576a139120c"
+  },
+  "circling the club": {
+    "file": "/audio/schu-fu/circling-the-club.mp3",
+    "key": "bd5e7977588f"
+  },
+  "classic back roll": {
+    "file": "/audio/schu-fu/classic-back-roll.mp3",
+    "key": "2b727ed5a2af"
+  },
+  "clearing the tower": {
+    "file": "/audio/schu-fu/clearing-the-tower.mp3",
+    "key": "c2cad4d436f9"
+  },
+  "cobra and horn": {
+    "file": "/audio/schu-fu/cobra-and-horn.mp3",
+    "key": "cc44a0c58abd"
+  },
+  "crashing horns": {
+    "file": "/audio/schu-fu/crashing-horns.mp3",
+    "key": "95f86784e80f"
+  },
+  "crescent wrench": {
+    "file": "/audio/schu-fu/crescent-wrench.mp3",
+    "key": "e2753e4b0a05"
+  },
+  "cross and sword": {
+    "file": "/audio/schu-fu/cross-and-sword.mp3",
+    "key": "7796e9f24b96"
+  },
+  "crossing serpent": {
+    "file": "/audio/schu-fu/crossing-serpent.mp3",
+    "key": "f4c0ffe98b70"
+  },
+  "d.b.": {
+    "file": "/audio/schu-fu/d-b.mp3",
+    "key": "b370e1da5b78"
+  },
+  "dark center line": {
+    "file": "/audio/schu-fu/dark-center-line.mp3",
+    "key": "acdea3994fff"
+  },
+  "dark chicken": {
+    "file": "/audio/schu-fu/dark-chicken.mp3",
+    "key": "48ea7122c163"
+  },
+  "dark cross": {
+    "file": "/audio/schu-fu/dark-cross.mp3",
+    "key": "8dbb53c92b46"
+  },
+  "dark horn": {
+    "file": "/audio/schu-fu/dark-horn.mp3",
+    "key": "596b52b4b659"
+  },
+  "dark knee": {
+    "file": "/audio/schu-fu/dark-knee.mp3",
+    "key": "a38a0d69def7"
+  },
+  "dark serpents": {
+    "file": "/audio/schu-fu/dark-serpents.mp3",
+    "key": "eca553cdb1f3"
+  },
+  "deadly cross": {
+    "file": "/audio/schu-fu/deadly-cross.mp3",
+    "key": "8e6b5b96d6f0"
+  },
+  "deadly friend": {
+    "file": "/audio/schu-fu/deadly-friend.mp3",
+    "key": "7809cdc97643"
+  },
+  "defending cross": {
+    "file": "/audio/schu-fu/defending-cross.mp3",
+    "key": "53fc2bd4bad1"
+  },
+  "deflecting shield": {
+    "file": "/audio/schu-fu/deflecting-shield.mp3",
+    "key": "2bff249c3eb3"
+  },
+  "dog pile": {
+    "file": "/audio/schu-fu/dog-pile.mp3",
+    "key": "6b46dcfe9c22"
+  },
+  "done": {
+    "file": "/audio/schu-fu/done.mp3",
+    "key": "592dbeb8610b"
+  },
+  "double chicken wing": {
+    "file": "/audio/schu-fu/double-chicken-wing.mp3",
+    "key": "da9b4413f638"
+  },
+  "down under": {
+    "file": "/audio/schu-fu/down-under.mp3",
+    "key": "cea5548ad66b"
+  },
+  "ducking dragon": {
+    "file": "/audio/schu-fu/ducking-dragon.mp3",
+    "key": "f2e67dbd6a05"
+  },
+  "eagle and dragon": {
+    "file": "/audio/schu-fu/eagle-and-dragon.mp3",
+    "key": "f7c9acdf3969"
+  },
+  "eight swords": {
+    "file": "/audio/schu-fu/eight-swords.mp3",
+    "key": "fe97636f9893"
+  },
+  "embracing bear": {
+    "file": "/audio/schu-fu/embracing-bear.mp3",
+    "key": "378ce5c25765"
+  },
+  "embracing tiger": {
+    "file": "/audio/schu-fu/embracing-tiger.mp3",
+    "key": "8e815f993411"
+  },
+  "entwined fists": {
+    "file": "/audio/schu-fu/entwined-fists.mp3",
+    "key": "745104c6d0f4"
+  },
+  "figure eight": {
+    "file": "/audio/schu-fu/figure-eight.mp3",
+    "key": "3da6949affea"
+  },
+  "five o clock sucker": {
+    "file": "/audio/schu-fu/five-o-clock-sucker.mp3",
+    "key": "4bd46ef6db52"
+  },
+  "flamingo": {
+    "file": "/audio/schu-fu/flamingo.mp3",
+    "key": "7e73d3de9d5a"
+  },
+  "flowering swords": {
+    "file": "/audio/schu-fu/flowering-swords.mp3",
+    "key": "2f5a26bd7c56"
+  },
+  "flowing knees": {
+    "file": "/audio/schu-fu/flowing-knees.mp3",
+    "key": "0210ee652cc8"
+  },
+  "flowing swords": {
+    "file": "/audio/schu-fu/flowing-swords.mp3",
+    "key": "4b71ceacb81c"
+  },
+  "flying chicken": {
+    "file": "/audio/schu-fu/flying-chicken.mp3",
+    "key": "d29b6d7f020d"
+  },
+  "folding wing": {
+    "file": "/audio/schu-fu/folding-wing.mp3",
+    "key": "bb7b40215408"
+  },
+  "gator": {
+    "file": "/audio/schu-fu/gator.mp3",
+    "key": "2a1008954824"
+  },
+  "give and take": {
+    "file": "/audio/schu-fu/give-and-take.mp3",
+    "key": "9b85ed41d1ea"
+  },
+  "grabbing leg": {
+    "file": "/audio/schu-fu/grabbing-leg.mp3",
+    "key": "0000fbf4dcd8"
+  },
+  "grabbing the serpent": {
+    "file": "/audio/schu-fu/grabbing-the-serpent.mp3",
+    "key": "ed35c9f9c359"
+  },
+  "grasshopper": {
+    "file": "/audio/schu-fu/grasshopper.mp3",
+    "key": "a66b3fd2e6d7"
+  },
+  "hair lock": {
+    "file": "/audio/schu-fu/hair-lock.mp3",
+    "key": "eedd139525ad"
+  },
+  "hollywood": {
+    "file": "/audio/schu-fu/hollywood.mp3",
+    "key": "8019656e4081"
+  },
+  "horns of the ram": {
+    "file": "/audio/schu-fu/horns-of-the-ram.mp3",
+    "key": "344fd343f033"
+  },
+  "horse schu": {
+    "file": "/audio/schu-fu/horse-schu.mp3",
+    "key": "3d3d59127d8e"
+  },
+  "housing the storm": {
+    "file": "/audio/schu-fu/housing-the-storm.mp3",
+    "key": "93931ee3a6bb"
+  },
+  "huddle up": {
+    "file": "/audio/schu-fu/huddle-up.mp3",
+    "key": "ae9925dc7dc7"
+  },
+  "j.f.s.": {
+    "file": "/audio/schu-fu/j-f-s.mp3",
+    "key": "45c580c80200"
+  },
+  "jackie chan": {
+    "file": "/audio/schu-fu/jackie-chan.mp3",
+    "key": "af659517b226"
+  },
+  "judo choke": {
+    "file": "/audio/schu-fu/judo-choke.mp3",
+    "key": "3ee3c7af8c02"
+  },
+  "jumping crane": {
+    "file": "/audio/schu-fu/jumping-crane.mp3",
+    "key": "16f83a2feb36"
+  },
+  "kissing cranes": {
+    "file": "/audio/schu-fu/kissing-cranes.mp3",
+    "key": "6472c798818d"
+  },
+  "kneeling horn": {
+    "file": "/audio/schu-fu/kneeling-horn.mp3",
+    "key": "3e6e2bfc4154"
+  },
+  "leap into darkness": {
+    "file": "/audio/schu-fu/leap-into-darkness.mp3",
+    "key": "1f8b4ef97c7d"
+  },
+  "lift and launch": {
+    "file": "/audio/schu-fu/lift-and-launch.mp3",
+    "key": "5450c3a40479"
+  },
+  "london bridge": {
+    "file": "/audio/schu-fu/london-bridge.mp3",
+    "key": "11572ff285b4"
+  },
+  "looping b.k.": {
+    "file": "/audio/schu-fu/looping-b-k.mp3",
+    "key": "d80595caf409"
+  },
+  "louisville slugger": {
+    "file": "/audio/schu-fu/louisville-slugger.mp3",
+    "key": "aae5a70f186f"
+  },
+  "lunch money": {
+    "file": "/audio/schu-fu/lunch-money.mp3",
+    "key": "ce55c464a6aa"
+  },
+  "lunch money part two": {
+    "file": "/audio/schu-fu/lunch-money-part-two.mp3",
+    "key": "b438eec8f535"
+  },
+  "melon": {
+    "file": "/audio/schu-fu/melon.mp3",
+    "key": "ab6c94961022"
+  },
+  "nelson": {
+    "file": "/audio/schu-fu/nelson.mp3",
+    "key": "ab7d9ce423c4"
+  },
+  "north and south": {
+    "file": "/audio/schu-fu/north-and-south.mp3",
+    "key": "5aced64bac13"
+  },
+  "nut cracker suite": {
+    "file": "/audio/schu-fu/nut-cracker-suite.mp3",
+    "key": "02347cbbd22f"
+  },
+  "opposing hammers": {
+    "file": "/audio/schu-fu/opposing-hammers.mp3",
+    "key": "3bde7a868dd1"
+  },
+  "palm thrust": {
+    "file": "/audio/schu-fu/palm-thrust.mp3",
+    "key": "fb218df67b11"
+  },
+  "panther": {
+    "file": "/audio/schu-fu/panther.mp3",
+    "key": "13b4ac64f870"
+  },
+  "parking lot 101": {
+    "file": "/audio/schu-fu/parking-lot-101.mp3",
+    "key": "744c0d984576"
+  },
+  "phantom tiger": {
+    "file": "/audio/schu-fu/phantom-tiger.mp3",
+    "key": "49f146fde2ee"
+  },
+  "piggy back": {
+    "file": "/audio/schu-fu/piggy-back.mp3",
+    "key": "a8f50ecceae9"
+  },
+  "pin gone bad": {
+    "file": "/audio/schu-fu/pin-gone-bad.mp3",
+    "key": "91c1adb328e4"
+  },
+  "platform kicker": {
+    "file": "/audio/schu-fu/platform-kicker.mp3",
+    "key": "5b199158ce2a"
+  },
+  "plunging sword": {
+    "file": "/audio/schu-fu/plunging-sword.mp3",
+    "key": "83cbad24221e"
+  },
+  "prancing tiger": {
+    "file": "/audio/schu-fu/prancing-tiger.mp3",
+    "key": "281fb8563430"
+  },
+  "pull and thrust": {
+    "file": "/audio/schu-fu/pull-and-thrust.mp3",
+    "key": "1b94e98870f1"
+  },
+  "pulling club": {
+    "file": "/audio/schu-fu/pulling-club.mp3",
+    "key": "8e5ac303d813"
+  },
+  "pulling crane": {
+    "file": "/audio/schu-fu/pulling-crane.mp3",
+    "key": "9ccabe424daf"
+  },
+  "pulling mane": {
+    "file": "/audio/schu-fu/pulling-mane.mp3",
+    "key": "1af815e10fbe"
+  },
+  "pulling wings": {
+    "file": "/audio/schu-fu/pulling-wings.mp3",
+    "key": "85dc7b677f84"
+  },
+  "push pull": {
+    "file": "/audio/schu-fu/push-pull.mp3",
+    "key": "076b3e657d79"
+  },
+  "pushy": {
+    "file": "/audio/schu-fu/pushy.mp3",
+    "key": "9443db13d582"
+  },
+  "raining horn": {
+    "file": "/audio/schu-fu/raining-horn.mp3",
+    "key": "5507b88f12cf"
+  },
+  "raking pendulum": {
+    "file": "/audio/schu-fu/raking-pendulum.mp3",
+    "key": "ab24370b2df3"
+  },
+  "raking tiger": {
+    "file": "/audio/schu-fu/raking-tiger.mp3",
+    "key": "f79d3e7f5ad8"
+  },
+  "range": {
+    "file": "/audio/schu-fu/range.mp3",
+    "key": "2433cd83b6bd"
+  },
+  "ready": {
+    "file": "/audio/schu-fu/ready.mp3",
+    "key": "7c1ab33aa44a"
+  },
+  "reverse craddle": {
+    "file": "/audio/schu-fu/reverse-craddle.mp3",
+    "key": "75e2883d8214"
+  },
+  "riding the storm": {
+    "file": "/audio/schu-fu/riding-the-storm.mp3",
+    "key": "45a3ba8125ae"
+  },
+  "rip cord": {
+    "file": "/audio/schu-fu/rip-cord.mp3",
+    "key": "5fa5112831cf"
+  },
+  "rock and hard place": {
+    "file": "/audio/schu-fu/rock-and-hard-place.mp3",
+    "key": "26b67f191b7a"
+  },
+  "rolling darkness": {
+    "file": "/audio/schu-fu/rolling-darkness.mp3",
+    "key": "70d0a05bef87"
+  },
+  "rolling hands": {
+    "file": "/audio/schu-fu/rolling-hands.mp3",
+    "key": "5af65c16a867"
+  },
+  "rolling rams": {
+    "file": "/audio/schu-fu/rolling-rams.mp3",
+    "key": "4635d718de80"
+  },
+  "sacrificial horn": {
+    "file": "/audio/schu-fu/sacrificial-horn.mp3",
+    "key": "401364676670"
+  },
+  "saturday night special": {
+    "file": "/audio/schu-fu/saturday-night-special.mp3",
+    "key": "5f42e92b9fbf"
+  },
+  "scissors": {
+    "file": "/audio/schu-fu/scissors.mp3",
+    "key": "e9cc2bbd98b7"
+  },
+  "scooping cranes": {
+    "file": "/audio/schu-fu/scooping-cranes.mp3",
+    "key": "8e26b239f6ee"
+  },
+  "scraping stomp": {
+    "file": "/audio/schu-fu/scraping-stomp.mp3",
+    "key": "f2285d6ce9df"
+  },
+  "see saw": {
+    "file": "/audio/schu-fu/see-saw.mp3",
+    "key": "91b570e0e2a0"
+  },
+  "shield and ram": {
+    "file": "/audio/schu-fu/shield-and-ram.mp3",
+    "key": "644499b66efb"
+  },
+  "shield of doom": {
+    "file": "/audio/schu-fu/shield-of-doom.mp3",
+    "key": "ffe9e4580292"
+  },
+  "shielding friend": {
+    "file": "/audio/schu-fu/shielding-friend.mp3",
+    "key": "b5442359e80b"
+  },
+  "shifting horn": {
+    "file": "/audio/schu-fu/shifting-horn.mp3",
+    "key": "e2926023dca3"
+  },
+  "shifting tiger": {
+    "file": "/audio/schu-fu/shifting-tiger.mp3",
+    "key": "28fcaaab5871"
+  },
+  "shoot back": {
+    "file": "/audio/schu-fu/shoot-back.mp3",
+    "key": "e89cde50c1e3"
+  },
+  "sleepy rice": {
+    "file": "/audio/schu-fu/sleepy-rice.mp3",
+    "key": "28919e2427c7"
+  },
+  "snapping storm": {
+    "file": "/audio/schu-fu/snapping-storm.mp3",
+    "key": "5aa4ecd350c8"
+  },
+  "spin and thrust": {
+    "file": "/audio/schu-fu/spin-and-thrust.mp3",
+    "key": "10a78fa5cd48"
+  },
+  "spiraling down": {
+    "file": "/audio/schu-fu/spiraling-down.mp3",
+    "key": "5501627a929e"
+  },
+  "spreading the dark bear": {
+    "file": "/audio/schu-fu/spreading-the-dark-bear.mp3",
+    "key": "56741eed244d"
+  },
+  "stealing jewels": {
+    "file": "/audio/schu-fu/stealing-jewels.mp3",
+    "key": "4de34489a6af"
+  },
+  "step and strike": {
+    "file": "/audio/schu-fu/step-and-strike.mp3",
+    "key": "4e9bcded4ce8"
+  },
+  "stomp": {
+    "file": "/audio/schu-fu/stomp.mp3",
+    "key": "49c35ebe6a42"
+  },
+  "sweepage": {
+    "file": "/audio/schu-fu/sweepage.mp3",
+    "key": "a0168884353a"
+  },
+  "sweeping cobra": {
+    "file": "/audio/schu-fu/sweeping-cobra.mp3",
+    "key": "ef3de7796251"
+  },
+  "sweeping tiger": {
+    "file": "/audio/schu-fu/sweeping-tiger.mp3",
+    "key": "e5138d567f49"
+  },
+  "sword and dragon": {
+    "file": "/audio/schu-fu/sword-and-dragon.mp3",
+    "key": "966189551ec5"
+  },
+  "table launch": {
+    "file": "/audio/schu-fu/table-launch.mp3",
+    "key": "eb233161a8e6"
+  },
+  "the chair": {
+    "file": "/audio/schu-fu/the-chair.mp3",
+    "key": "889fe53a502e"
+  },
+  "the corner": {
+    "file": "/audio/schu-fu/the-corner.mp3",
+    "key": "7d79b5803da7"
+  },
+  "the crab": {
+    "file": "/audio/schu-fu/the-crab.mp3",
+    "key": "85b7b05cff07"
+  },
+  "the heel hook": {
+    "file": "/audio/schu-fu/the-heel-hook.mp3",
+    "key": "31f6fe4e2cf5"
+  },
+  "the ladder": {
+    "file": "/audio/schu-fu/the-ladder.mp3",
+    "key": "88a255edd9bb"
+  },
+  "the old one two": {
+    "file": "/audio/schu-fu/the-old-one-two.mp3",
+    "key": "43c4276b5736"
+  },
+  "the rope": {
+    "file": "/audio/schu-fu/the-rope.mp3",
+    "key": "83751ca5e136"
+  },
+  "the spinner": {
+    "file": "/audio/schu-fu/the-spinner.mp3",
+    "key": "5394e56d46ac"
+  },
+  "the switch": {
+    "file": "/audio/schu-fu/the-switch.mp3",
+    "key": "2c1b39f501ed"
+  },
+  "the wall": {
+    "file": "/audio/schu-fu/the-wall.mp3",
+    "key": "09df4e407f48"
+  },
+  "the wedge": {
+    "file": "/audio/schu-fu/the-wedge.mp3",
+    "key": "db3f9d9df45f"
+  },
+  "the wrap": {
+    "file": "/audio/schu-fu/the-wrap.mp3",
+    "key": "a0d8865e5b64"
+  },
+  "three rams": {
+    "file": "/audio/schu-fu/three-rams.mp3",
+    "key": "5d7d7ae471c7"
+  },
+  "thrusting ram": {
+    "file": "/audio/schu-fu/thrusting-ram.mp3",
+    "key": "9e5dd5adc6a1"
+  },
+  "thundering rams": {
+    "file": "/audio/schu-fu/thundering-rams.mp3",
+    "key": "fef02fb5647e"
+  },
+  "tornado": {
+    "file": "/audio/schu-fu/tornado.mp3",
+    "key": "74f8554b0c6f"
+  },
+  "torquing rams": {
+    "file": "/audio/schu-fu/torquing-rams.mp3",
+    "key": "708abc8d4ae2"
+  },
+  "trap and roll": {
+    "file": "/audio/schu-fu/trap-and-roll.mp3",
+    "key": "a6f3ba67dfc4"
+  },
+  "turning the tower": {
+    "file": "/audio/schu-fu/turning-the-tower.mp3",
+    "key": "7b2f70832abb"
+  },
+  "twin cranes": {
+    "file": "/audio/schu-fu/twin-cranes.mp3",
+    "key": "3f6b4b755668"
+  },
+  "twin dragons": {
+    "file": "/audio/schu-fu/twin-dragons.mp3",
+    "key": "dbc8110bd4bd"
+  },
+  "twin horses": {
+    "file": "/audio/schu-fu/twin-horses.mp3",
+    "key": "085e19e7f0b5"
+  },
+  "twin serpents": {
+    "file": "/audio/schu-fu/twin-serpents.mp3",
+    "key": "e87693656598"
+  },
+  "twin swords": {
+    "file": "/audio/schu-fu/twin-swords.mp3",
+    "key": "6e2bc6317b3c"
+  },
+  "twin tigers": {
+    "file": "/audio/schu-fu/twin-tigers.mp3",
+    "key": "e3e8aebd1fd8"
+  },
+  "twirling horns": {
+    "file": "/audio/schu-fu/twirling-horns.mp3",
+    "key": "c97e84e88669"
+  },
+  "twisting mane": {
+    "file": "/audio/schu-fu/twisting-mane.mp3",
+    "key": "277e44af78e2"
+  },
+  "unlocking the bear": {
+    "file": "/audio/schu-fu/unlocking-the-bear.mp3",
+    "key": "224202d33da6"
+  },
+  "unrolling rams": {
+    "file": "/audio/schu-fu/unrolling-rams.mp3",
+    "key": "5ea17257c2f9"
+  },
+  "unwinding hinge": {
+    "file": "/audio/schu-fu/unwinding-hinge.mp3",
+    "key": "1c26e8562d73"
+  },
+  "unwrap": {
+    "file": "/audio/schu-fu/unwrap.mp3",
+    "key": "ba337d84c79b"
+  },
+  "wedging swords": {
+    "file": "/audio/schu-fu/wedging-swords.mp3",
+    "key": "78df576a5e90"
+  },
+  "whip it": {
+    "file": "/audio/schu-fu/whip-it.mp3",
+    "key": "86779231e898"
+  },
+  "whipping the dragon": {
+    "file": "/audio/schu-fu/whipping-the-dragon.mp3",
+    "key": "282e4c6ad9db"
+  },
+  "whipping the hammer": {
+    "file": "/audio/schu-fu/whipping-the-hammer.mp3",
+    "key": "aa8ba1a65cca"
+  },
+  "white crane": {
+    "file": "/audio/schu-fu/white-crane.mp3",
+    "key": "2e6ac6e8444a"
+  },
+  "white on rice": {
+    "file": "/audio/schu-fu/white-on-rice.mp3",
+    "key": "d4e8250b13bc"
+  },
+  "white storm": {
+    "file": "/audio/schu-fu/white-storm.mp3",
+    "key": "923d2fd8133c"
+  },
+  "windmills": {
+    "file": "/audio/schu-fu/windmills.mp3",
+    "key": "4a3245c2968b"
+  },
+  "yielding crane": {
+    "file": "/audio/schu-fu/yielding-crane.mp3",
+    "key": "f34c5aa772b5"
+  }
+}

@@ -1,45 +1,111 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
+import data from "@data/schu-fu.json";
+import clips from "@data/schu-fu-audio.json";
+import "@styles/schu-fu.css";
+
+// `say` is an optional respelling for names the voice mispronounces
+const belts: {
+  title: string;
+  color: string;
+  items: { name: string; say?: string }[];
+}[] = data;
+// recorded clips from `npm run voices`; anything missing falls back to the browser's voice
+const audio: Record<string, { file: string }> = clips;
 ---
 
 <script src="@scripts/schu-fu.js"></script>
 
-<BaseLayout title="schu fu speech synthesis">
+<BaseLayout title="schu fu">
   <p>
-    Enter some text in the input below and press return or the "play" button to
-    hear it. change voices using the dropdown menu.
+    Pick the belts you want to drill, set the interval, and blitz. Your device
+    calls the techniques out so you can practice solo between classes.
   </p>
 
-  <form>
-    <label for="txt">Enter text</label>
-    <input id="txt" type="text" class="txt" />
-    <div>
-      <label for="rate">Rate</label><input
-        type="range"
-        min="0.5"
-        max="2"
-        value="1"
-        step="0.1"
-        id="rate"
-      />
-      <div class="rate-value">1</div>
-      <div class="clearfix"></div>
-    </div>
-    <div>
-      <label for="pitch">Pitch</label><input
-        type="range"
-        min="0"
-        max="2"
-        value="1"
-        step="0.1"
-        id="pitch"
-      />
-      <div class="pitch-value">1</div>
-      <div class="clearfix"></div>
-    </div>
-    <select></select>
+  <section class="stage" aria-label="Current technique">
+    <p class="call"></p>
+    <p class="progress"></p>
+    <p class="status" role="status"></p>
+  </section>
+
+  <form
+    class="drill"
+    data-ready-audio={audio.ready?.file}
+    data-done-audio={audio.done?.file}
+  >
     <div class="controls">
-      <button id="play" type="submit">Play</button>
+      <button id="start" type="submit">Blitz!</button>
+      <button id="pause" type="button" disabled>Pause</button>
+      <button id="stop" type="button" disabled>Stop</button>
     </div>
+
+    <fieldset>
+      <legend>Drill</legend>
+      <div class="field">
+        <label for="interval">Interval</label>
+        <input
+          id="interval"
+          type="range"
+          min="0.5"
+          max="20"
+          step="0.5"
+          value="1"
+        />
+        <output id="interval-value" for="interval"></output>
+      </div>
+      <div class="field">
+        <label for="order">Order</label>
+        <select id="order">
+          <option value="listed">Belt order</option>
+          <option value="reversed">Reverse belt order</option>
+          <option value="shuffled">Shuffled</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="rounds">Rounds</label>
+        <select id="rounds">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="0">Until I stop</option>
+        </select>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Belts</legend>
+      {
+        belts.map((belt) => (
+          <details class="belt" data-belt={belt.title}>
+            <summary>
+              <label>
+                <input type="checkbox" class="belt-toggle" />
+                <span class="swatch" style={`background-color: ${belt.color}`} />
+                {belt.title}
+              </label>
+              <span class="count" />
+            </summary>
+            <ul>
+              {belt.items.map((item) => (
+                <li>
+                  <label>
+                    <input
+                      type="checkbox"
+                      name="technique"
+                      value={item.name}
+                      data-say={item.say}
+                      data-audio={audio[item.name]?.file}
+                    />
+                    {item.name}
+                  </label>
+                </li>
+              ))}
+            </ul>
+          </details>
+        ))
+      }
+    </fieldset>
   </form>
 </BaseLayout>

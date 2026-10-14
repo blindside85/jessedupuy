@@ -1,0 +1,130 @@
+.stage {
+  margin: 1.5rem 0;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  background-color: var(--color-white-50);
+}
+
+.stage p {
+  margin: 0;
+  min-height: 1.5em;
+}
+
+.stage .call {
+  min-height: 1.2em;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: clamp(2rem, 9vw, 3.5rem);
+  line-height: 1.2;
+  color: var(--color-light-accent);
+}
+
+.drill .controls {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.drill button {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  font: inherit;
+  color: inherit;
+  background-color: var(--color-white-50);
+  border: 1px solid currentColor;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+.drill button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.drill fieldset {
+  margin: 0 0 1.5rem;
+  padding: 0.75rem 1rem 1rem;
+  border: 1px solid var(--color-light-gray-50);
+}
+
+.drill legend {
+  padding: 0 0.4rem;
+  font-weight: bold;
+}
+
+.drill .field {
+  display: grid;
+  grid-template-columns: 4rem 1fr 3rem;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.drill .field select {
+  grid-column: 2 / -1;
+  min-width: 0;
+}
+
+.drill select {
+  font: inherit;
+}
+
+.drill .belt summary {
+  padding: 0.35rem 0;
+  cursor: pointer;
+}
+
+.drill .belt .swatch {
+  display: inline-block;
+  width: 1.5em;
+  height: 0.6em;
+  margin: 0 0.25em;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px var(--color-gray);
+}
+
+.drill .belt .count {
+  float: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.drill .belt ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+  gap: 0.25rem 1rem;
+  margin: 0.25rem 0 1rem;
+  padding: 0 0 0 1.25rem;
+  list-style: none;
+}
+
+.drill .belt li {
+  margin: 0;
+}
+
+/* keeps long names that wrap aligned beside the checkbox instead of under it */
+.drill .belt li label {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4em;
+}
+
+html[data-theme="dark"] {
+  .stage {
+    background-color: var(--color-black-50);
+  }
+
+  .stage .call {
+    color: var(--color-dark-accent);
+  }
+
+  .drill {
+    color-scheme: dark;
+  }
+
+  .drill button {
+    background-color: var(--color-black-50);
+  }
+
+  .drill fieldset {
+    border-color: var(--color-near-white-50);
+  }
+}
