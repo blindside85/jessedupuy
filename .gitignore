@@ -13,3 +13,6 @@ node_modules/*
 
 # Python bytecode (scripts/schu-fu-voices.py)
 __pycache__/
+
+# Schu-Fu: personal technique write-ups stay off the public site
+src/data/schu-fu-private.json

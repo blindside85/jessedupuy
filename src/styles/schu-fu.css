@@ -656,3 +656,92 @@ legend {
     transition: none;
   }
 }
+
+/* CALL MODE, TECHNIQUE DETAILS, SETS */
+
+/* one technique per row, so its details can open underneath it */
+.picker ul {
+  grid-template-columns: 1fr;
+}
+
+.picker li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+}
+
+.picker li:last-child {
+  border-bottom: none;
+}
+
+.about-toggle {
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  color: var(--muted);
+}
+
+.about-toggle[aria-expanded="true"] {
+  color: var(--accent);
+}
+
+.about {
+  grid-column: 1 / -1;
+  margin: 0 0 0.75rem 1.75rem;
+  font-size: 0.92rem;
+}
+
+.about dt,
+.drill-about dt {
+  margin-top: 0.5rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.about dd,
+.drill-about dd {
+  margin: 0.1rem 0 0;
+}
+
+.prose {
+  white-space: pre-line;
+  line-height: 1.5;
+}
+
+/* the stance to start from, and the attack for a training partner to read */
+.drill-ref {
+  white-space: pre-line;
+  min-height: 2.8em;
+  max-width: 32rem;
+  margin: -0.5rem 0 1.25rem !important;
+  font-size: clamp(1rem, 4vw, 1.35rem);
+  opacity: 0.85;
+}
+
+.drill-about {
+  width: min(32rem, 100%);
+  max-height: 32vh;
+  margin-top: 0.75rem;
+  padding: 0.75rem 1rem;
+  overflow-y: auto;
+  background: color-mix(in srgb, var(--bg) 55%, transparent);
+  border-radius: var(--radius);
+  color: var(--text);
+  text-align: left;
+  font-size: 0.92rem;
+  cursor: auto;
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+.drill-about dl {
+  margin: 0;
+}

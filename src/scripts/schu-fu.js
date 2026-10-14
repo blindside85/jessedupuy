@@ -17,9 +17,11 @@ const startCount = document.querySelector(".go-count");
 
 const drillBelt = drillView.querySelector(".drill-belt");
 const call = drillView.querySelector(".drill-call");
+const drillRef = drillView.querySelector(".drill-ref");
 const progress = drillView.querySelector(".drill-progress");
 const status = drillView.querySelector(".drill-status");
 const countdown = drillView.querySelector(".countdown-fill");
+const drillAbout = drillView.querySelector(".drill-about");
 const pauseButton = document.querySelector("#pause");
 const stopButton = document.querySelector("#stop");
 
@@ -43,6 +45,7 @@ const belts = [...document.querySelectorAll(".tile")].map((tile) => {
 });
 const allBoxes = belts.flatMap((belt) => belt.boxes);
 
+
 // seconds of quiet after each call
 const PACES = { blitz: 1, steady: 3, slow: 6 };
 
@@ -65,6 +68,8 @@ let wakeLock;
 let speaking = false;
 let startedAt = 0;
 let called = 0;
+// what's on screen now, for the details shown on pause
+let current = null;
 
 let audioContext;
 // decoded clips by URL, each fetched once
@@ -284,6 +289,9 @@ function selectedTechniques() {
         name: box.value,
         say: box.dataset.say || box.value,
         audio: box.dataset.audio,
+        attack: box.dataset.attack,
+        stance: box.dataset.stance,
+        about: box.closest("li").querySelector(".about"),
         belt,
       })),
   );
@@ -336,11 +344,19 @@ function fillCountdown() {
   countdown.style.transform = "scaleX(1)";
 }
 
-// calls a technique, then leaves the interval of quiet before the next one
-function say(technique) {
+// fetch the next clip while this one plays
+function prefetchNext() {
+  const next = queue[position];
+  if (next?.audio) {
+    loadClip(next.audio).catch(() => {});
+  }
+}
+
+// calls a line, then leaves the interval of quiet before the next one
+function say(line) {
   const thisRun = run;
   fillCountdown();
-  speak(technique).then(() => {
+  speak(line).then(() => {
     if (thisRun !== run) {
       return;
     }
@@ -348,11 +364,7 @@ function say(technique) {
     runCountdown(ms);
     timer = setTimeout(callNext, ms);
   });
-  // fetch the next clip while this one plays
-  const next = queue[position];
-  if (next?.audio) {
-    loadClip(next.audio).catch(() => {});
-  }
+  prefetchNext();
 }
 
 // the drill screen takes on the colour of the belt being called
@@ -381,12 +393,20 @@ function callNext() {
   const technique = queue[position];
   position += 1;
   called += 1;
+  current = technique;
   paint(technique.belt);
   drillBelt.textContent = `${technique.belt.title} belt`;
   if (technique.belt.stripes) {
     drillBelt.append(technique.belt.stripes.cloneNode(true));
   }
   call.textContent = technique.name;
+  // where the student starts, and what their training partner attacks with
+  drillRef.textContent = [
+    technique.stance && `Stance: ${technique.stance}`,
+    technique.attack && `Attack: ${technique.attack}`,
+  ]
+    .filter(Boolean)
+    .join("\n");
   progress.textContent =
     `${position} / ${queue.length}` +
     (totalRounds === 1
@@ -427,9 +447,12 @@ function start() {
   round = 0;
   called = 0;
   startedAt = performance.now();
+  current = null;
+  drillAbout.hidden = true;
   paint(null);
   drillBelt.textContent = "";
   call.textContent = READY.name;
+  drillRef.textContent = "";
   progress.textContent = "";
   status.textContent = "";
   say(READY);
@@ -445,12 +468,28 @@ function pause() {
   silence();
   freezeCountdown();
   status.textContent = "Paused · tap to resume";
+  showDetails();
+}
+
+// what a paused student might want to check: the technique's stance, attack
+// and (where the notes are present) its steps
+function showDetails() {
+  if (current?.about) {
+    const about = current.about.cloneNode(true);
+    about.hidden = false;
+    about.removeAttribute("id");
+    drillAbout.replaceChildren(about);
+  } else {
+    drillAbout.replaceChildren();
+  }
+  drillAbout.hidden = drillAbout.childElementCount === 0;
 }
 
 function resume() {
   unlockAudio();
   setState("running");
   status.textContent = "";
+  drillAbout.hidden = true;
   callNext();
 }
 
@@ -545,13 +584,22 @@ setupView.addEventListener("change", () => {
 
 startButton.onclick = start;
 againButton.onclick = start;
+
+// each technique's ⓘ opens its attack, stance and notes underneath it
+for (const toggle of document.querySelectorAll(".about-toggle")) {
+  toggle.onclick = function () {
+    const about = document.getElementById(toggle.getAttribute("aria-controls"));
+    about.hidden = !about.hidden;
+    toggle.setAttribute("aria-expanded", String(!about.hidden));
+  };
+}
 backButton.onclick = () => show(setupView);
 pauseButton.onclick = togglePause;
 stopButton.onclick = stop;
 
-// tap anywhere on the drill screen to pause or resume
+// tap anywhere on the drill screen to pause or resume (but not while reading the details)
 drillView.addEventListener("click", (event) => {
-  if (!event.target.closest("button")) {
+  if (!event.target.closest("button, .drill-about")) {
     togglePause();
   }
 });
