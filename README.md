@@ -166,7 +166,7 @@ The folder name becomes the post's URL slug (`my-post/index.md` → `/posts/my-p
 
 ### Writing in Obsidian
 
-Blog posts live in `src/content/posts/`, which is symlinked into a dedicated Obsidian vault at `~/Documents/jessedupuy-blog` (the `posts` folder inside that vault is the symlink). The vault has `useMarkdownLinks` enabled so pasted images use standard `![](./image.png)` syntax instead of Obsidian's `![[wikilink]]` embeds, and new attachments save into the same folder as the note they're pasted into — matching the co-located image convention above.
+Blog posts live in `src/content/posts/`, which is symlinked into a dedicated Obsidian vault at `~/Documents/jessedupuy-writing` (the `posts` folder inside that vault is the symlink). The vault has `useMarkdownLinks` enabled so pasted images use standard `![](./image.png)` syntax instead of Obsidian's `![[wikilink]]` embeds, and new attachments save into the same folder as the note they're pasted into — matching the co-located image convention above.
 
 To publish: open the vault, write the post inside `posts/` (as a folder if it has images, per above), set `draft: false` when ready, then commit and push via the [Obsidian Git](https://github.com/denolehov/obsidian-git) plugin's "Commit and push" command. Pushing to `main` auto-deploys.
 
