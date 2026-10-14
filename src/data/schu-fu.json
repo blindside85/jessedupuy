@@ -121,6 +121,7 @@
   },
   {
     "title": "Second green",
+    "stripes": 1,
     "color": "green",
     "items": [
       { "name": "pulling wings" },
@@ -169,6 +170,7 @@
   },
   {
     "title": "Second brown",
+    "stripes": 1,
     "color": "brown",
     "items": [
       { "name": "thundering rams" },
@@ -193,6 +195,7 @@
   },
   {
     "title": "Third brown",
+    "stripes": 2,
     "color": "brown",
     "items": [
       { "name": "jumping crane" },

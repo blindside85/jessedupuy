@@ -14,7 +14,8 @@ const appleTouchIcon = await getImage({
 });
 const faviconSvg = await getImage({ src: faviconSvgSrc, format: "svg" });
 
-const { title, desc } = Astro.props;
+// pages with their own look (like the Schu-Fu app) skip the blog's background textures
+const { title, desc, backgrounds = true } = Astro.props;
 
 // Construct full canonical URL
 const canonicalURL = new URL(Astro.url.pathname, SITE.url).href;
@@ -34,8 +35,14 @@ const ogImage = `${SITE.url}/og-image.png`;
 <link rel="canonical" href={canonicalURL} />
 
 <!-- Preload critical background images (both themes, ~12KB total) -->
-<link rel="preload" href={bgLightSrc} as="image" type="image/webp" />
-<link rel="preload" href={bgDarkSrc} as="image" type="image/webp" />
+{
+  backgrounds && (
+    <>
+      <link rel="preload" href={bgLightSrc} as="image" type="image/webp" />
+      <link rel="preload" href={bgDarkSrc} as="image" type="image/webp" />
+    </>
+  )
+}
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website" />

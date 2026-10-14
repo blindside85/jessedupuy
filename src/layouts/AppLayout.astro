@@ -1,0 +1,22 @@
+---
+// For pages that are their own little app (like Schu-Fu): the site's head and
+// metadata, but none of the blog's header, footer or styling.
+import HtmlHead from "@components/HtmlHead.astro";
+import { SITE } from "@/config";
+
+const { title, desc = SITE.description, themeColor } = Astro.props;
+const fullTitle = Astro.url.host.includes("localhost")
+  ? `DEV: ${title} | ${SITE.name}`
+  : `${title} | ${SITE.name}`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <HtmlHead title={fullTitle} {desc} backgrounds={false} />
+    {themeColor && <meta name="theme-color" content={themeColor} />}
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

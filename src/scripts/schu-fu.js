@@ -1,29 +1,54 @@
 const synth = window.speechSynthesis;
 
-const form = document.querySelector(".drill");
-const call = document.querySelector(".call");
-const progress = document.querySelector(".progress");
-const status = document.querySelector(".status");
+const app = document.querySelector(".app");
+const setupView = document.querySelector("#setup");
+const drillView = document.querySelector("#drill");
+const summaryView = document.querySelector("#summary");
 
+const myBelt = document.querySelector("#my-belt");
+const nextBeltButton = document.querySelector("#next-belt");
+const reviewButton = document.querySelector("#review");
+const clearButton = document.querySelector("#clear");
+const customPace = document.querySelector(".custom-pace");
+const interval = document.querySelector("#interval");
+const intervalValue = document.querySelector("#interval-value");
 const startButton = document.querySelector("#start");
+const startCount = document.querySelector(".go-count");
+
+const drillBelt = drillView.querySelector(".drill-belt");
+const call = drillView.querySelector(".drill-call");
+const progress = drillView.querySelector(".drill-progress");
+const status = drillView.querySelector(".drill-status");
+const countdown = drillView.querySelector(".countdown-fill");
 const pauseButton = document.querySelector("#pause");
 const stopButton = document.querySelector("#stop");
 
-const interval = document.querySelector("#interval");
-const intervalValue = document.querySelector("#interval-value");
-const order = document.querySelector("#order");
-const rounds = document.querySelector("#rounds");
+const summaryStats = summaryView.querySelector(".summary-stats");
+const againButton = document.querySelector("#again");
+const backButton = document.querySelector("#back");
 
-const belts = [...document.querySelectorAll(".belt")].map((belt) => ({
-  title: belt.dataset.belt,
-  toggle: belt.querySelector(".belt-toggle"),
-  count: belt.querySelector(".count"),
-  boxes: [...belt.querySelectorAll("input[name=technique]")],
-}));
+const belts = [...document.querySelectorAll(".tile")].map((tile) => {
+  const dialog = document.querySelector(`#belt-${tile.dataset.index}`);
+  return {
+    title: tile.dataset.belt,
+    style: tile.getAttribute("style"),
+    tile,
+    toggle: tile.querySelector(".tile-toggle"),
+    edit: tile.querySelector(".tile-edit"),
+    count: tile.querySelector(".tile-count"),
+    stripes: tile.querySelector(".stripes"),
+    dialog,
+    boxes: [...dialog.querySelectorAll("input[name=technique]")],
+  };
+});
+const allBoxes = belts.flatMap((belt) => belt.boxes);
 
-const READY = { name: "ready", say: "ready", audio: form.dataset.readyAudio };
+// seconds of quiet after each call
+const PACES = { blitz: 1, steady: 3, slow: 6 };
+
+const READY = { name: "ready", say: "ready", audio: app.dataset.readyAudio };
 // the dojo's yell, "oo" as in "who" + "saaa" as in "saw"
-const DONE = { name: "oosaaa!", say: "oosa", audio: form.dataset.doneAudio };
+const DONE = { name: "oosaaa!", say: "oosa", audio: app.dataset.doneAudio };
 
 const STORAGE_KEY = "schu-fu";
 
@@ -38,6 +63,8 @@ let round = 0;
 let timer;
 let wakeLock;
 let speaking = false;
+let startedAt = 0;
+let called = 0;
 
 let audioContext;
 // decoded clips by URL, each fetched once
@@ -45,6 +72,22 @@ const clips = new Map();
 let source;
 // held here so Chrome doesn't garbage-collect it before its end event fires
 let utterance;
+
+function choice(name) {
+  return document.querySelector(`input[name=${name}]:checked`).value;
+}
+
+function choose(name, value) {
+  const input =
+    document.querySelector(`input[name=${name}][value="${value}"]`) ??
+    document.querySelector(`input[name=${name}]`);
+  input.checked = true;
+}
+
+function intervalSeconds() {
+  const pace = choice("pace");
+  return pace === "custom" ? Number(interval.value) : PACES[pace];
+}
 
 function loadSettings() {
   try {
@@ -56,13 +99,12 @@ function loadSettings() {
 
 function saveSettings() {
   saved = {
-    on: belts
-      .flatMap((belt) => belt.boxes)
-      .filter((box) => box.checked)
-      .map((box) => box.value),
+    on: allBoxes.filter((box) => box.checked).map((box) => box.value),
+    myBelt: myBelt.value,
+    pace: choice("pace"),
     interval: interval.value,
-    order: order.value,
-    rounds: rounds.value,
+    order: choice("order"),
+    rounds: choice("rounds"),
   };
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
@@ -73,35 +115,76 @@ function saveSettings() {
 
 function restoreSettings() {
   const on = new Set(saved.on);
-  for (const belt of belts) {
-    for (const box of belt.boxes) {
-      box.checked = on.has(box.value);
-    }
+  for (const box of allBoxes) {
+    box.checked = on.has(box.value);
   }
-  for (const [input, value] of [
-    [interval, saved.interval],
-    [order, saved.order],
-    [rounds, saved.rounds],
-  ]) {
-    if (value !== undefined) {
-      input.value = value;
-    }
-    if (input.selectedIndex === -1) {
-      input.selectedIndex = 0;
-    }
+  myBelt.value = saved.myBelt ?? "";
+  if (myBelt.selectedIndex === -1) {
+    myBelt.value = "";
   }
+  if (saved.interval) {
+    interval.value = saved.interval;
+  }
+  choose("pace", saved.pace ?? "steady");
+  choose("order", saved.order ?? "listed");
+  choose("rounds", saved.rounds ?? "1");
 }
 
-function updateOutputs() {
-  intervalValue.textContent = `${interval.value}s`;
-}
+// ---- setup screen ----
 
 function syncBelt(belt) {
   const on = belt.boxes.filter((box) => box.checked).length;
-  belt.toggle.checked = on === belt.boxes.length;
-  belt.toggle.indeterminate = on > 0 && on < belt.boxes.length;
-  belt.count.textContent = `${on}/${belt.boxes.length}`;
+  const total = belt.boxes.length;
+  const beltState = on === 0 ? "none" : on === total ? "all" : "some";
+  belt.tile.dataset.state = beltState;
+  belt.toggle.setAttribute(
+    "aria-pressed",
+    { none: "false", some: "mixed", all: "true" }[beltState],
+  );
+  belt.count.textContent = `${on}/${total}`;
 }
+
+function syncSetup() {
+  belts.forEach(syncBelt);
+  const count = allBoxes.filter((box) => box.checked).length;
+  startButton.disabled = count === 0;
+  startCount.textContent =
+    count === 0
+      ? "Pick a belt to start"
+      : `${count} technique${count === 1 ? "" : "s"}`;
+  customPace.hidden = choice("pace") !== "custom";
+  intervalValue.textContent = `${interval.value}s`;
+  syncQuickPicks();
+}
+
+// "practice next belt" and "review" shortcuts, from the belt you've said you hold
+function syncQuickPicks() {
+  const mine = myBelt.value === "" ? null : Number(myBelt.value);
+  const next = mine === null ? undefined : belts[mine + 1];
+  nextBeltButton.hidden = !next;
+  if (next) {
+    nextBeltButton.textContent = `Next belt: ${next.title}`;
+  }
+  reviewButton.hidden = mine === null || mine < 0;
+  if (mine !== null && mine >= 0) {
+    reviewButton.textContent =
+      mine === 0
+        ? `Review ${belts[0].title}`
+        : `Review ${belts[0].title} → ${belts[mine].title}`;
+  }
+}
+
+function selectBelts(pick) {
+  belts.forEach((belt, i) => {
+    for (const box of belt.boxes) {
+      box.checked = pick(i);
+    }
+  });
+  syncSetup();
+  saveSettings();
+}
+
+// ---- audio ----
 
 // must first run from a tap or click, or iOS keeps the audio silent
 function unlockAudio() {
@@ -175,7 +258,9 @@ async function speak(technique) {
   speaking = true;
   try {
     if (technique.audio) {
-      await playClip(technique.audio).catch(() => speakWithBrowser(technique.say));
+      await playClip(technique.audio).catch(() =>
+        speakWithBrowser(technique.say),
+      );
     } else {
       await speakWithBrowser(technique.say);
     }
@@ -189,6 +274,8 @@ function silence() {
   synth?.cancel();
 }
 
+// ---- drill ----
+
 function selectedTechniques() {
   const perBelt = belts.map((belt) =>
     belt.boxes
@@ -197,11 +284,11 @@ function selectedTechniques() {
         name: box.value,
         say: box.dataset.say || box.value,
         audio: box.dataset.audio,
-        belt: belt.title,
+        belt,
       })),
   );
   // reversing swaps the belts around, not the techniques within each one
-  if (order.value === "reversed") {
+  if (choice("order") === "reversed") {
     perBelt.reverse();
   }
   return perBelt.flat();
@@ -222,21 +309,44 @@ function shuffle(items, notFirst) {
 function nextRound() {
   const last = queue[queue.length - 1]?.name;
   queue = selectedTechniques();
-  if (order.value === "shuffled") {
+  if (choice("order") === "shuffled") {
     shuffle(queue, last);
   }
   position = 0;
   round += 1;
 }
 
+// the bar drains over the quiet between calls, so you can see the next one coming
+function runCountdown(ms) {
+  countdown.style.transition = "none";
+  countdown.style.transform = "scaleX(1)";
+  countdown.getBoundingClientRect();
+  countdown.style.transition = `transform ${ms}ms linear`;
+  countdown.style.transform = "scaleX(0)";
+}
+
+function freezeCountdown() {
+  const current = getComputedStyle(countdown).transform;
+  countdown.style.transition = "none";
+  countdown.style.transform = current;
+}
+
+function fillCountdown() {
+  countdown.style.transition = "none";
+  countdown.style.transform = "scaleX(1)";
+}
+
 // calls a technique, then leaves the interval of quiet before the next one
 function say(technique) {
   const thisRun = run;
+  fillCountdown();
   speak(technique).then(() => {
     if (thisRun !== run) {
       return;
     }
-    timer = setTimeout(callNext, Number(interval.value) * 1000);
+    const ms = intervalSeconds() * 1000;
+    runCountdown(ms);
+    timer = setTimeout(callNext, ms);
   });
   // fetch the next clip while this one plays
   const next = queue[position];
@@ -245,8 +355,17 @@ function say(technique) {
   }
 }
 
+// the drill screen takes on the colour of the belt being called
+function paint(belt) {
+  if (belt) {
+    drillView.setAttribute("style", belt.style);
+  } else {
+    drillView.removeAttribute("style");
+  }
+}
+
 function callNext() {
-  const totalRounds = Number(rounds.value); // 0 means until stopped
+  const totalRounds = Number(choice("rounds")); // 0 means until stopped
   if (position >= queue.length) {
     if (totalRounds && round >= totalRounds) {
       finish();
@@ -261,23 +380,33 @@ function callNext() {
 
   const technique = queue[position];
   position += 1;
+  called += 1;
+  paint(technique.belt);
+  drillBelt.textContent = `${technique.belt.title} belt`;
+  if (technique.belt.stripes) {
+    drillBelt.append(technique.belt.stripes.cloneNode(true));
+  }
   call.textContent = technique.name;
   progress.textContent =
-    `${technique.belt} · ${position} of ${queue.length}` +
+    `${position} / ${queue.length}` +
     (totalRounds === 1
       ? ""
       : ` · round ${round}${totalRounds ? ` of ${totalRounds}` : ""}`);
   say(technique);
 }
 
+function show(view) {
+  for (const each of [setupView, drillView, summaryView]) {
+    each.hidden = each !== view;
+  }
+}
+
 function setState(next) {
   state = next;
   run += 1;
   clearTimeout(timer);
-  startButton.disabled = state !== "idle";
-  pauseButton.disabled = state === "idle";
-  stopButton.disabled = state === "idle";
   pauseButton.textContent = state === "paused" ? "Resume" : "Pause";
+  drillView.toggleAttribute("data-paused", state === "paused");
   if (state === "running") {
     holdWakeLock();
   } else {
@@ -288,14 +417,18 @@ function setState(next) {
 
 function start() {
   if (selectedTechniques().length === 0) {
-    status.textContent = "Pick at least one belt first.";
     return;
   }
   unlockAudio();
   setState("running");
+  show(drillView);
   queue = [];
   position = 0;
   round = 0;
+  called = 0;
+  startedAt = performance.now();
+  paint(null);
+  drillBelt.textContent = "";
   call.textContent = READY.name;
   progress.textContent = "";
   status.textContent = "";
@@ -306,10 +439,12 @@ function pause() {
   // a call cut off mid-word gets repeated on resume
   if (speaking && position > 0) {
     position -= 1;
+    called -= 1;
   }
   setState("paused");
   silence();
-  status.textContent = "Paused";
+  freezeCountdown();
+  status.textContent = "Paused · tap to resume";
 }
 
 function resume() {
@@ -319,17 +454,28 @@ function resume() {
   callNext();
 }
 
+function togglePause() {
+  if (state === "paused") {
+    resume();
+  } else if (state === "running") {
+    pause();
+  }
+}
+
 function stop() {
   setState("idle");
   silence();
-  call.textContent = "";
-  progress.textContent = "";
-  status.textContent = "Stopped";
+  show(setupView);
 }
 
 function finish() {
   setState("idle");
-  call.textContent = DONE.name;
+  const seconds = Math.round((performance.now() - startedAt) / 1000);
+  const time = `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, "0")}`;
+  summaryStats.textContent =
+    `${called} technique${called === 1 ? "" : "s"} · ` +
+    `${round} round${round === 1 ? "" : "s"} · ${time}`;
+  show(summaryView);
   speak(DONE);
 }
 
@@ -347,39 +493,80 @@ async function holdWakeLock() {
   }
 }
 
+// ---- wiring ----
+
 restoreSettings();
-updateOutputs();
+syncSetup();
 
 for (const belt of belts) {
-  belt.toggle.onchange = function () {
+  belt.toggle.onclick = function () {
+    const all = belt.boxes.every((box) => box.checked);
     for (const box of belt.boxes) {
-      box.checked = belt.toggle.checked;
+      box.checked = !all;
     }
-    syncBelt(belt);
+    syncSetup();
+    saveSettings();
   };
-  for (const box of belt.boxes) {
-    box.addEventListener("change", () => syncBelt(belt));
+  belt.edit.onclick = () => belt.dialog.showModal();
+  for (const button of belt.dialog.querySelectorAll("[data-set]")) {
+    button.onclick = function () {
+      for (const box of belt.boxes) {
+        box.checked = button.dataset.set === "all";
+      }
+      syncSetup();
+      saveSettings();
+    };
   }
-  syncBelt(belt);
+  // tapping the dimmed backdrop closes the picker too
+  belt.dialog.addEventListener("click", (event) => {
+    if (event.target === belt.dialog) {
+      belt.dialog.close();
+    }
+  });
 }
 
-form.oninput = updateOutputs;
-form.onchange = saveSettings;
-
-form.onsubmit = function (event) {
-  event.preventDefault();
-  start();
+nextBeltButton.onclick = () => {
+  const next = Number(myBelt.value) + 1;
+  selectBelts((i) => i === next);
 };
-
-pauseButton.onclick = function () {
-  if (state === "paused") {
-    resume();
-  } else {
-    pause();
-  }
+reviewButton.onclick = () => {
+  const mine = Number(myBelt.value);
+  selectBelts((i) => i <= mine);
 };
+clearButton.onclick = () => selectBelts(() => false);
 
+setupView.addEventListener("input", () => {
+  intervalValue.textContent = `${interval.value}s`;
+});
+setupView.addEventListener("change", () => {
+  syncSetup();
+  saveSettings();
+});
+
+startButton.onclick = start;
+againButton.onclick = start;
+backButton.onclick = () => show(setupView);
+pauseButton.onclick = togglePause;
 stopButton.onclick = stop;
+
+// tap anywhere on the drill screen to pause or resume
+drillView.addEventListener("click", (event) => {
+  if (!event.target.closest("button")) {
+    togglePause();
+  }
+});
+
+document.addEventListener("keydown", (event) => {
+  if (drillView.hidden) {
+    return;
+  }
+  if (event.key === " ") {
+    event.preventDefault();
+    togglePause();
+  } else if (event.key === "Escape") {
+    stop();
+  }
+});
 
 document.addEventListener("visibilitychange", () => {
   if (document.visibilityState === "visible" && state === "running") {

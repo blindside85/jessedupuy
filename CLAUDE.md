@@ -47,6 +47,7 @@ npm run preview
   - Automatically prefixes page title with "DEV:" on localhost
 - `MarkdownPostLayout.astro` - Layout for blog posts
 - `ErrorLayout.astro` - Layout for error pages
+- `AppLayout.astro` - Bare layout for self-contained app pages (site head/meta only, no blog header, footer or styles); used by the Schu-Fu drill caller
 
 ### Component Structure
 - `BaseHeader.astro` - Site navigation header

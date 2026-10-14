@@ -1,111 +1,276 @@
 ---
-import BaseLayout from "@layouts/BaseLayout.astro";
+import AppLayout from "@layouts/AppLayout.astro";
 import data from "@data/schu-fu.json";
 import clips from "@data/schu-fu-audio.json";
 import "@styles/schu-fu.css";
 
-// `say` is an optional respelling for names the voice mispronounces
+// `stripes` counts the black stripes students add for each level of a colour
+// past the first; `say` is an optional respelling for names the voice mispronounces
 const belts: {
   title: string;
   color: string;
+  stripes?: number;
   items: { name: string; say?: string }[];
 }[] = data;
 // recorded clips from `npm run voices`; anything missing falls back to the browser's voice
 const audio: Record<string, { file: string }> = clips;
+
+// each belt's colour, and the text colour that reads on top of it
+const palette: Record<string, [string, string]> = {
+  yellow: ["#f2c230", "#1c1500"],
+  orange: ["#ef7d22", "#1f0d00"],
+  purple: ["#7d3fb0", "#ffffff"],
+  blue: ["#2b63d9", "#ffffff"],
+  green: ["#2f9a4a", "#ffffff"],
+  brown: ["#7b4a26", "#ffffff"],
+  black: ["#000000", "#ffffff"],
+};
+const beltStyle = (color: string) => {
+  const [belt, ink] = palette[color] ?? ["#444", "#fff"];
+  return `--belt: ${belt}; --on-belt: ${ink}`;
+};
+
+const paces = [
+  { value: "blitz", label: "Blitz", hint: "1s" },
+  { value: "steady", label: "Steady", hint: "3s" },
+  { value: "slow", label: "Slow", hint: "6s" },
+  { value: "custom", label: "Custom", hint: "" },
+];
+const orders = [
+  { value: "listed", label: "In order" },
+  { value: "reversed", label: "Reverse belts" },
+  { value: "shuffled", label: "Shuffle" },
+];
+const rounds = [
+  { value: "1", label: "1" },
+  { value: "2", label: "2" },
+  { value: "3", label: "3" },
+  { value: "0", label: "∞", aria: "Until I stop" },
+];
 ---
 
 <script src="@scripts/schu-fu.js"></script>
 
-<BaseLayout title="schu fu">
-  <p>
-    Pick the belts you want to drill, set the interval, and blitz. Your device
-    calls the techniques out so you can practice solo between classes.
-  </p>
-
-  <section class="stage" aria-label="Current technique">
-    <p class="call"></p>
-    <p class="progress"></p>
-    <p class="status" role="status"></p>
-  </section>
-
-  <form
-    class="drill"
+<AppLayout
+  title="schu fu"
+  desc="A drill caller for Schu-Fu: pick your belts and it calls out techniques for solo practice between classes."
+  themeColor="#0e0e10"
+>
+  <div
+    class="app"
     data-ready-audio={audio.ready?.file}
     data-done-audio={audio.done?.file}
   >
-    <div class="controls">
-      <button id="start" type="submit">Blitz!</button>
-      <button id="pause" type="button" disabled>Pause</button>
-      <button id="stop" type="button" disabled>Stop</button>
-    </div>
+    <main id="setup" class="setup">
+      <header class="bar">
+        <a class="home" href="/">← jessedupuy.me</a>
+        <h1 class="brand">Schu Fu</h1>
+      </header>
 
-    <fieldset>
-      <legend>Drill</legend>
-      <div class="field">
-        <label for="interval">Interval</label>
-        <input
-          id="interval"
-          type="range"
-          min="0.5"
-          max="20"
-          step="0.5"
-          value="1"
-        />
-        <output id="interval-value" for="interval"></output>
-      </div>
-      <div class="field">
-        <label for="order">Order</label>
-        <select id="order">
-          <option value="listed">Belt order</option>
-          <option value="reversed">Reverse belt order</option>
-          <option value="shuffled">Shuffled</option>
-        </select>
-      </div>
-      <div class="field">
-        <label for="rounds">Rounds</label>
-        <select id="rounds">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="5">5</option>
-          <option value="10">10</option>
-          <option value="0">Until I stop</option>
-        </select>
-      </div>
-    </fieldset>
+      <p class="intro">
+        Pick your belts, set the pace and blitz. The techniques get called out
+        so you can drill solo between classes.
+      </p>
 
-    <fieldset>
-      <legend>Belts</legend>
+      <section class="panel" aria-labelledby="belts-heading">
+        <div class="panel-head">
+          <h2 id="belts-heading">Belts</h2>
+          <button type="button" id="clear" class="link">Clear</button>
+        </div>
+
+        <div class="my-belt">
+          <label for="my-belt">My belt</label>
+          <select id="my-belt">
+            <option value="">Choose…</option>
+            <option value="-1">White (no belt yet)</option>
+            {belts.map((belt, i) => <option value={i}>{belt.title}</option>)}
+          </select>
+          <span class="my-belt-hint">remembered on this device</span>
+        </div>
+        <div class="quick-picks">
+          <button type="button" id="next-belt" class="chip" hidden></button>
+          <button type="button" id="review" class="chip" hidden></button>
+        </div>
+
+        <ul class="tiles">
+          {
+            belts.map((belt, i) => (
+              <li
+                class="tile"
+                data-index={i}
+                data-belt={belt.title}
+                data-state="none"
+                style={beltStyle(belt.color)}
+              >
+                <button type="button" class="tile-toggle" aria-pressed="false">
+                  <span class="tile-name">{belt.title}</span>
+                  <span class="tile-count" />
+                </button>
+                {!!belt.stripes && (
+                  <span class="stripes" aria-hidden="true">
+                    {Array.from({ length: belt.stripes }, () => (
+                      <span />
+                    ))}
+                  </span>
+                )}
+                <button
+                  type="button"
+                  class="tile-edit"
+                  aria-label={`Pick ${belt.title} techniques`}
+                  title="Pick techniques"
+                >
+                  ⋯
+                </button>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <section class="panel" aria-label="Drill settings">
+        <fieldset class="segmented">
+          <legend>Pace</legend>
+          <div class="segments">
+            {
+              paces.map((pace) => (
+                <label>
+                  <input type="radio" name="pace" value={pace.value} />
+                  <span>
+                    {pace.label}
+                    {pace.hint && <small>{pace.hint}</small>}
+                  </span>
+                </label>
+              ))
+            }
+          </div>
+        </fieldset>
+        <div class="custom-pace" hidden>
+          <label for="interval">Seconds between calls</label>
+          <input
+            id="interval"
+            type="range"
+            min="0.5"
+            max="20"
+            step="0.5"
+            value="4"
+          />
+          <output id="interval-value" for="interval"></output>
+        </div>
+
+        <fieldset class="segmented">
+          <legend>Order</legend>
+          <div class="segments">
+            {
+              orders.map((order) => (
+                <label>
+                  <input type="radio" name="order" value={order.value} />
+                  <span>{order.label}</span>
+                </label>
+              ))
+            }
+          </div>
+        </fieldset>
+
+        <fieldset class="segmented">
+          <legend>Rounds</legend>
+          <div class="segments">
+            {
+              rounds.map((round) => (
+                <label>
+                  <input
+                    type="radio"
+                    name="rounds"
+                    value={round.value}
+                    aria-label={round.aria}
+                  />
+                  <span>{round.label}</span>
+                </label>
+              ))
+            }
+          </div>
+        </fieldset>
+      </section>
+
+      <div class="go">
+        <button type="button" id="start" disabled>
+          <span class="go-label">Blitz!</span>
+          <span class="go-count">Pick a belt</span>
+        </button>
+      </div>
+
       {
-        belts.map((belt) => (
-          <details class="belt" data-belt={belt.title}>
-            <summary>
-              <label>
-                <input type="checkbox" class="belt-toggle" />
-                <span class="swatch" style={`background-color: ${belt.color}`} />
-                {belt.title}
-              </label>
-              <span class="count" />
-            </summary>
-            <ul>
-              {belt.items.map((item) => (
-                <li>
-                  <label>
-                    <input
-                      type="checkbox"
-                      name="technique"
-                      value={item.name}
-                      data-say={item.say}
-                      data-audio={audio[item.name]?.file}
-                    />
-                    {item.name}
-                  </label>
-                </li>
-              ))}
-            </ul>
-          </details>
+        belts.map((belt, i) => (
+          <dialog
+            id={`belt-${i}`}
+            class="picker"
+            aria-labelledby={`belt-${i}-title`}
+            style={beltStyle(belt.color)}
+          >
+            <form method="dialog">
+              <header class="picker-head">
+                <h2 id={`belt-${i}-title`}>
+                  {belt.title}
+                  {!!belt.stripes && (
+                    <span class="stripes" aria-hidden="true">
+                      {Array.from({ length: belt.stripes }, () => (
+                        <span />
+                      ))}
+                    </span>
+                  )}
+                </h2>
+                <button class="chip">Done</button>
+              </header>
+              <div class="picker-actions">
+                <button type="button" class="link" data-set="all">
+                  All
+                </button>
+                <button type="button" class="link" data-set="none">
+                  None
+                </button>
+              </div>
+              <ul>
+                {belt.items.map((item) => (
+                  <li>
+                    <label>
+                      <input
+                        type="checkbox"
+                        name="technique"
+                        value={item.name}
+                        data-say={item.say}
+                        data-audio={audio[item.name]?.file}
+                      />
+                      <span>{item.name}</span>
+                    </label>
+                  </li>
+                ))}
+              </ul>
+            </form>
+          </dialog>
         ))
       }
-    </fieldset>
-  </form>
-</BaseLayout>
+    </main>
+
+    <section id="drill" class="drill" aria-label="Drill" hidden>
+      <p class="drill-belt"></p>
+      <p class="drill-call"></p>
+      <div class="countdown" aria-hidden="true">
+        <div class="countdown-fill"></div>
+      </div>
+      <p class="drill-progress"></p>
+      <p class="drill-status" role="status"></p>
+      <div class="drill-controls">
+        <button type="button" id="pause">Pause</button>
+        <button type="button" id="stop">Stop</button>
+      </div>
+    </section>
+
+    <section id="summary" class="summary" aria-label="Drill finished" hidden>
+      <p class="summary-yell">Oosaaa!</p>
+      <p class="summary-stats"></p>
+      <div class="summary-actions">
+        <button type="button" id="again" class="primary">Again</button>
+        <button type="button" id="back">Back to belts</button>
+      </div>
+    </section>
+  </div>
+</AppLayout>
