@@ -9,7 +9,8 @@ WORKDIR /app
 
 RUN npm run build
 
-FROM nginx:1.26-alpine-slim as website
+# stable follows nginx's current stable line, like node:lts does for Node
+FROM nginx:stable-alpine-slim AS website
 
 COPY --from=builder /app/dist /usr/share/nginx/html
 

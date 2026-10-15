@@ -83,7 +83,7 @@ Configured in `tsconfig.json`:
 - Console message/Easter egg implemented in `BodyTop.astro`
 
 ## Technology Stack
-- **Framework**: Astro 7.2.10
+- **Framework**: Astro 7.3.8
 - **UI**: Preact components via `@astrojs/preact`
 - **Image optimization**: sharp-ico for favicon generation
 - **TypeScript**: Strict mode with `astro/tsconfigs/strictest`
