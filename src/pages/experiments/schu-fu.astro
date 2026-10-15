@@ -19,11 +19,32 @@ const beltStyle = (color: string) => {
   return `--belt: ${belt}; --on-belt: ${ink}`;
 };
 
-type Item = { name: string; say?: string; attack?: string; stance?: string };
+type Attacker = { attack?: string; from?: number; notes?: string };
+type Item = {
+  name: string;
+  say?: string;
+  attack?: string;
+  stance?: string;
+  attackers?: Attacker[];
+  partnerNotes?: string;
+};
+
+// one extra attacker, as "Target from 1: Back knuckle to temple"
+const describe = (attacker: Attacker) =>
+  `${attacker.attack ?? "Another attacker"}${attacker.from ? ` from ${attacker.from}` : ""}` +
+  (attacker.notes ? `: ${attacker.notes}` : "");
+// what the drill screen fits in a line: one extra attacker in full, or a count
+const alsoLine = (attackers: Attacker[] = []) =>
+  attackers.length === 0
+    ? undefined
+    : attackers.length === 1
+      ? `Also: ${describe({ ...attackers[0], notes: undefined })}`
+      : `+${attackers.length} more attackers`;
 
 // `stripes` counts the black stripes students add for each level of a colour
 // past the first; `say` is an optional respelling for names the voice mispronounces;
-// `attack` and `stance` are what each technique answers and where it starts
+// `stance` is where each technique starts, `attack` what it answers, `attackers`
+// any more in a multi-person technique, and `partnerNotes` tips for the uki
 const belts: {
   title: string;
   color: string;
@@ -259,6 +280,7 @@ const rounds = [
                           data-audio={audio[item.name]?.file}
                           data-attack={item.attack}
                           data-stance={item.stance}
+                          data-also={alsoLine(item.attackers)}
                         />
                         <span>{item.name}</span>
                       </label>
@@ -284,6 +306,24 @@ const rounds = [
                               <>
                                 <dt>Attack</dt>
                                 <dd>{item.attack}</dd>
+                              </>
+                            )}
+                            {item.attackers && (
+                              <>
+                                <dt>Also</dt>
+                                <dd>
+                                  <ul>
+                                    {item.attackers.map((attacker) => (
+                                      <li>{describe(attacker)}</li>
+                                    ))}
+                                  </ul>
+                                </dd>
+                              </>
+                            )}
+                            {item.partnerNotes && (
+                              <>
+                                <dt>For the uki</dt>
+                                <dd>{item.partnerNotes}</dd>
                               </>
                             )}
                             {notes?.technique && (

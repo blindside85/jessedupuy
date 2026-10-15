@@ -291,6 +291,7 @@ function selectedTechniques() {
         audio: box.dataset.audio,
         attack: box.dataset.attack,
         stance: box.dataset.stance,
+        also: box.dataset.also,
         about: box.closest("li").querySelector(".about"),
         belt,
       })),
@@ -400,10 +401,12 @@ function callNext() {
     drillBelt.append(technique.belt.stripes.cloneNode(true));
   }
   call.textContent = technique.name;
+  call.style.setProperty("--longest", longestWord(technique.name));
   // where the student starts, and what their training partner attacks with
   drillRef.textContent = [
     technique.stance && `Stance: ${technique.stance}`,
     technique.attack && `Attack: ${technique.attack}`,
+    technique.also,
   ]
     .filter(Boolean)
     .join("\n");
@@ -413,6 +416,11 @@ function callNext() {
       ? ""
       : ` · round ${round}${totalRounds ? ` of ${totalRounds}` : ""}`);
   say(technique);
+}
+
+// sizes the call so its longest word fits on one line
+function longestWord(text) {
+  return Math.max(...text.split(/\s+/).map((word) => word.length));
 }
 
 function show(view) {
@@ -452,6 +460,7 @@ function start() {
   paint(null);
   drillBelt.textContent = "";
   call.textContent = READY.name;
+  call.style.setProperty("--longest", longestWord(READY.name));
   drillRef.textContent = "";
   progress.textContent = "";
   status.textContent = "";

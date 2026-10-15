@@ -545,10 +545,16 @@ legend {
   justify-content: center;
   max-width: 100%;
   font-family: var(--display);
-  font-size: clamp(2.6rem, 13vw, 7.5rem);
+  /* as big as fits: the longest word (--longest letters, set per call) never
+     has to break, since this face's capitals run about 0.82em wide */
+  font-size: clamp(
+    1.5rem,
+    min(13vw, calc((100vw - 2.5rem) / (var(--longest, 8) * 0.82))),
+    7.5rem
+  );
   line-height: 1.02;
   text-transform: uppercase;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
   text-wrap: balance;
 }
 
@@ -709,6 +715,22 @@ legend {
 .about dd,
 .drill-about dd {
   margin: 0.1rem 0 0;
+}
+
+/* the extra attackers: a plain list, not the picker's technique rows */
+.about ul,
+.drill-about ul {
+  display: block;
+  margin: 0;
+  padding-left: 1.1rem;
+  list-style: disc;
+}
+
+.about li,
+.drill-about li {
+  display: list-item;
+  margin: 0.1rem 0;
+  border-bottom: none;
 }
 
 .prose {
